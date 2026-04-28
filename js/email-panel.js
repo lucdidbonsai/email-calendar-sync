@@ -1,6 +1,7 @@
   // ── Email detail panel ──
   var currentEmailIdx = 0;
   var emailPanelJustOpened = false;
+  var emailAccessPopoverOpen = false;
 
   // Toggle recipients dropdown for the single visible message.
   function toggleRecipients(msgIdx) {
