@@ -92,17 +92,174 @@
     if (connected) connected.style.display = 'none';
   }
 
-  // ── Calendar event detail modal ──
-  function openCalEventModal(title, time, participants) {
-    var titleEl = document.getElementById('cal-event-modal-title');
-    var timeEl = document.getElementById('cal-event-modal-time');
-    if (titleEl) titleEl.textContent = title;
-    if (timeEl) timeEl.innerHTML = time;
-    document.getElementById('modal-cal-event').classList.remove('hidden');
+  // ── Meeting overlay modal ──
+  var pastMeetingData = {
+    1: {
+      day: 'Mon', date: '20', month: 'Jan',
+      title: 'Strategic Planning Offsite',
+      time: 'Jan 20 · 9:00 AM → 10:00 AM',
+      duration: '1h',
+      description: 'Q1 strategic planning session to review competitive landscape, align on TAM estimates for the enterprise segment, and set delivery priorities for the TechStart Labs engagement.',
+      link: 'https://meet.google.com/spo-nfst-jan',
+      recording: 'https://zoom.us/rec/share/strategic-planning-offsite-jan20',
+      noteTitle: 'Zoom AI: Strategic Planning Offsite',
+      participants: [
+        { name: 'Chris Taylor', email: 'chris.taylor@hellobonsai.com', img: 'https://ui-avatars.com/api/?name=CT&size=250&background=4c525a&color=ffffff&format=png', role: 'Host' },
+        { name: 'Michael Fawler', email: 'michael.fawler@techstart.co', img: 'https://ui-avatars.com/api/?name=MF&size=250&background=4c525a&color=ffffff&format=png', role: '' }
+      ]
+    },
+    2: {
+      day: 'Tue', date: '13', month: 'Jan',
+      title: 'Product Demo – Enterprise Plan',
+      time: 'Jan 13 · 4:00 PM → 5:00 PM',
+      duration: '1h',
+      description: 'Live demonstration of Bonsai\'s enterprise plan features — automation workflows, CRM integrations, and reporting — for Michael Fawler ahead of contract sign-off.',
+      link: 'https://meet.google.com/pde-ent-jan13',
+      recording: 'https://zoom.us/rec/share/product-demo-enterprise-jan13',
+      noteTitle: 'Zoom AI: Product Demo – Enterprise Plan',
+      participants: [
+        { name: 'Chris Taylor', email: 'chris.taylor@hellobonsai.com', img: 'https://ui-avatars.com/api/?name=CT&size=250&background=4c525a&color=ffffff&format=png', role: 'Host' },
+        { name: 'Michael Fawler', email: 'michael.fawler@techstart.co', img: 'https://ui-avatars.com/api/?name=MF&size=250&background=4c525a&color=ffffff&format=png', role: '' }
+      ]
+    },
+    10: {
+      day: 'Mon', date: '14', month: 'Apr',
+      title: 'Q1 Strategy Review – TechStart Labs',
+      time: 'Today · 2:00 PM → 3:00 PM',
+      duration: '1h',
+      description: 'Quarterly strategy review with TechStart Labs to align on Q1 deliverables, progress against OKRs, and roadmap priorities for the upcoming quarter.',
+      link: 'https://zoom.us/j/92345678901',
+      recording: null,
+      upcoming: true,
+      participants: [
+        { name: 'Tom Bradley', email: 'tom.bradley@catalystconsulting.io', img: 'https://randomuser.me/api/portraits/men/32.jpg', role: 'Host' },
+        { name: 'Michael Fawler', email: 'michael.fawler@techstart.co', img: 'https://ui-avatars.com/api/?name=MF&size=250&background=4c525a&color=ffffff&format=png', role: '' },
+        { name: 'Lucas Did', email: 'lucas.did@hellobonsai.com', img: 'https://ui-avatars.com/api/?name=LD&size=250&background=4c525a&color=ffffff&format=png', role: '' }
+      ]
+    },
+    11: {
+      day: 'Thu', date: '17', month: 'Apr',
+      title: 'Brand Refresh – Mood Board Review',
+      time: 'Thu Apr 17 · 10:00 AM → 11:30 AM',
+      duration: '1h 30m',
+      description: 'Review of initial mood board concepts and visual direction for the brand refresh project, focusing on color palette, typography, and imagery style.',
+      link: 'https://zoom.us/j/83456789012',
+      recording: null,
+      upcoming: true,
+      participants: [
+        { name: 'Amanda Chen', email: 'amanda.chen@catalystconsulting.io', img: 'https://randomuser.me/api/portraits/women/44.jpg', role: 'Host' },
+        { name: 'Michael Fawler', email: 'michael.fawler@techstart.co', img: 'https://ui-avatars.com/api/?name=MF&size=250&background=4c525a&color=ffffff&format=png', role: '' }
+      ]
+    },
+    12: {
+      day: 'Fri', date: '18', month: 'Apr',
+      title: 'Market Entry Strategy – Final Review',
+      time: 'Fri Apr 18 · 3:30 PM → 4:00 PM',
+      duration: '30m',
+      description: 'Final review of the market entry strategy deliverable before submission. Sign-off on enterprise segment recommendations and go-to-market plan.',
+      link: 'https://zoom.us/j/74567890123',
+      recording: null,
+      upcoming: true,
+      participants: [
+        { name: 'Tom Bradley', email: 'tom.bradley@catalystconsulting.io', img: 'https://randomuser.me/api/portraits/men/32.jpg', role: 'Host' },
+        { name: 'Chris Taylor', email: 'chris.taylor@hellobonsai.com', img: 'https://ui-avatars.com/api/?name=CT&size=250&background=4c525a&color=ffffff&format=png', role: '' },
+        { name: 'Michael Fawler', email: 'michael.fawler@techstart.co', img: 'https://ui-avatars.com/api/?name=MF&size=250&background=4c525a&color=ffffff&format=png', role: '' }
+      ]
+    }
+  };
+
+  function openMeetingOverlay(id) {
+    var m = pastMeetingData[id];
+    if (!m) return;
+
+    var participantsHTML = m.participants.map(function(p) {
+      return '<div class="mom-participant-row">' +
+        '<div class="mom-participant-avatar" style="background-image:url(\'' + p.img + '\');"></div>' +
+        '<span class="mom-participant-name">' + p.name + '</span>' +
+        '<span class="mom-participant-email">' + p.email + '</span>' +
+        (p.role ? '<span class="mom-participant-role">' + p.role + '</span>' : '') +
+        (!m.upcoming ? '<span class="mom-participant-status"><span class="mom-participant-status-dot"></span>Attended</span>' : '') +
+        '</div>';
+    }).join('');
+
+    var badgeHTML = m.upcoming
+      ? '<div class="mom-attended-badge">Upcoming</div>'
+      : '<div class="mom-attended-badge"><span class="mom-attended-dot"></span>Attended</div>';
+
+    var metaSectionHTML = '<div class="mom-section">' +
+        '<div class="mom-meta-row">' +
+          '<span class="mom-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>' +
+          '<span>' + m.time + '</span>' +
+          '<span class="mom-duration">(' + m.duration + ')</span>' +
+        '</div>' +
+        '<div class="mom-meta-row">' +
+          '<span class="mom-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>' +
+          '<span class="mom-description">' + m.description + '</span>' +
+        '</div>' +
+        (m.link && !m.upcoming ? '<div class="mom-meta-row">' +
+          '<span class="mom-meta-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>' +
+          '<a class="mom-link" href="' + m.link + '" target="_blank">' + m.link + '</a>' +
+        '</div>' : '') +
+      '</div>';
+
+    var recordingSectionHTML = (m.recording || m.noteTitle)
+      ? '<div class="mom-section">' +
+          '<div class="mom-section-label">Assets</div>' +
+          '<div style="display:flex;gap:8px;flex-wrap:wrap;">' +
+          (m.recording
+            ? '<a class="mom-recording-chip" href="' + m.recording + '" target="_blank">' +
+                '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>' +
+                'Recording' +
+                '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>' +
+              '</a>'
+            : '') +
+          (m.noteTitle
+            ? '<button class="mom-note-chip">' +
+                '<svg width="12" height="12" viewBox="0 0 20 22" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M3 0C1.34315 0 0 1.34315 0 3V19C0 20.6569 1.34315 22 3 22H17C18.6569 22 20 20.6569 20 19V7.82843C20 7.03278 19.6839 6.26972 19.1213 5.70711L14.2929 0.878679C13.7303 0.316071 12.9672 0 12.1716 0H3ZM2 3C2 2.44772 2.44772 2 3 2H11V7C11 8.10457 11.8954 9 13 9H18V19C18 19.5523 17.5523 20 17 20H3C2.44772 20 2 19.5523 2 19V3ZM17.5858 7H13V2.41421L17.5858 7ZM5 12C5 11.4477 5.44772 11 6 11H14C14.5523 11 15 11.4477 15 12C15 12.5523 14.5523 13 14 13H6C5.44772 13 5 12.5523 5 12ZM6 15C5.44772 15 5 15.4477 5 16C5 16.5523 5.44772 17 6 17H10C10.5523 17 11 16.5523 11 16C11 15.4477 10.5523 15 10 15H6Z" fill="currentColor"/></svg>' +
+                'Note' +
+              '</button>'
+            : '') +
+          '</div>' +
+        '</div>'
+      : '';
+
+    document.getElementById('meeting-overlay-dialog').innerHTML =
+      '<div class="mom-header">' +
+        '<div class="mom-date-block">' +
+          '<span class="mom-date-day">' + m.day + '</span>' +
+          '<span class="mom-date-num">' + m.date + '</span>' +
+        '</div>' +
+        '<div class="mom-header-main">' +
+          '<div class="mom-title">' + m.title + '</div>' +
+          badgeHTML +
+        '</div>' +
+      '</div>' +
+      metaSectionHTML +
+      recordingSectionHTML +
+      (m.upcoming && m.link
+        ? '<div class="mom-section" style="border-bottom:none;">' +
+            '<a class="mom-join-btn" href="' + m.link + '" target="_blank" onclick="event.stopPropagation();">' +
+              '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>' +
+              'Join Meeting' +
+            '</a>' +
+          '</div>'
+        : '') +
+      '<div class="mom-section">' +
+        '<div class="mom-section-label">Participants ' + m.participants.length + '</div>' +
+        participantsHTML +
+      '</div>';
+
+    document.getElementById('meeting-overlay-modal').classList.remove('hidden');
   }
 
-  function closeCalEventModal() {
-    document.getElementById('modal-cal-event').classList.add('hidden');
+  function closeMeetingOverlay() {
+    document.getElementById('meeting-overlay-modal').classList.add('hidden');
+  }
+
+  function handleMeetingOverlayClick(e) {
+    if (e.target === document.getElementById('meeting-overlay-modal')) {
+      closeMeetingOverlay();
+    }
   }
 
   // ── Email three-dot menu ──
@@ -161,8 +318,8 @@
     if (e.key !== 'Escape') return;
     var sendModal = document.getElementById('modal-send-email');
     var calModal = document.getElementById('modal-calendar-settings');
-    var calEventModal = document.getElementById('modal-cal-event');
+    var meetingModal = document.getElementById('meeting-overlay-modal');
     if (sendModal && !sendModal.classList.contains('hidden')) { closeSendEmailModal(); return; }
     if (calModal && !calModal.classList.contains('hidden')) { closeCalendarSettingsModal(); return; }
-    if (calEventModal && !calEventModal.classList.contains('hidden')) { closeCalEventModal(); return; }
+    if (meetingModal && !meetingModal.classList.contains('hidden')) { closeMeetingOverlay(); return; }
   });

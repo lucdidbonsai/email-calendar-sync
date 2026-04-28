@@ -1942,7 +1942,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: #ffffff;
+  background: #FBFDFA;
   border: 1px solid var(--border-content);
   border-radius: 8px;
   padding: 14px 16px;
@@ -2134,6 +2134,7 @@
   padding: 70px 40px 60px;
   text-align: center;
   background: var(--bg-grey-fa);
+  border: 1px solid #ECECEC;
   border-radius: 8px;
   margin-top: 8px;
 }
@@ -2150,4 +2151,185 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+/* ── Meeting overlay modal (mom-*) ── */
+#meeting-overlay-modal .modal-dialog {
+  width: 520px;
+  padding: 0;
+  overflow: hidden;
+}
+.mom-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 22px 24px 18px;
+  border-bottom: 1px solid var(--border-content);
+}
+.mom-date-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 38px;
+  padding-top: 2px;
+}
+.mom-date-day {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #22AD01;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.mom-date-num {
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--text-default);
+  line-height: 1;
+}
+.mom-header-main { flex: 1; min-width: 0; }
+.mom-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-default);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.mom-attended-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #22AD01;
+}
+.mom-attended-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #22AD01;
+}
+.mom-section {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-content);
+}
+.mom-section:last-child { border-bottom: none; }
+.mom-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+.mom-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-default);
+  margin-bottom: 8px;
+}
+.mom-meta-row:last-child { margin-bottom: 0; }
+.mom-meta-icon { color: var(--text-muted); flex-shrink: 0; display: flex; align-items: center; }
+.mom-duration { color: var(--text-muted); font-size: 12px; }
+.mom-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #22AD01;
+  text-decoration: none;
+  word-break: break-all;
+}
+.mom-link:hover { text-decoration: underline; color: #22AD01; }
+.mom-description {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+.mom-participant-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+}
+.mom-participant-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--bg-grey-f5);
+  flex-shrink: 0;
+}
+.mom-participant-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-default);
+  flex-shrink: 0;
+}
+.mom-participant-email {
+  font-size: 12px;
+  color: var(--text-muted);
+  flex: 1;
+}
+.mom-participant-role {
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+.mom-participant-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #22AD01;
+  flex-shrink: 0;
+}
+.mom-participant-status-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #22AD01;
+}
+.mom-recording-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 10px;
+  background: var(--bg-content);
+  border: 1px solid var(--border-content);
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--text-default);
+  text-decoration: none;
+  transition: background 0.1s;
+}
+.mom-recording-chip:hover { background: var(--bg-grey-f5); color: var(--text-default); }
+.mom-note-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;
+  color: var(--text-muted); background: var(--bg-grey-fa);
+  border: 1px solid var(--border-content); cursor: pointer;
+  text-decoration: none; transition: background 0.12s, color 0.12s;
+}
+.mom-note-chip:hover { background: var(--bg-grey-f5); color: var(--text-default); }
+.mom-join-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #22AD01;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.1s;
+}
+.mom-join-btn:hover {
+  background: #1d9a01;
+  color: #ffffff !important;
+  text-decoration: none !important;
 }
