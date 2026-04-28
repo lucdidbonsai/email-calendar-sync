@@ -1,0 +1,116 @@
+<div id="email-detail-panel" class="email-detail-panel">
+
+  <!-- Top bar: "View email" label + close -->
+  <div class="edp-top-bar">
+    <div class="edp-top-bar-icon">
+      <svg width="15" height="15" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="12" height="9" rx="1.5"/><path d="M1 5l6 4 6-4"/></svg>
+    </div>
+    <div class="edp-top-bar-label">View email</div>
+    <button class="edp-close-btn" onclick="closeEmailPanel()">
+      <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="1" y1="1" x2="10" y2="10"/><line x1="10" y1="1" x2="1" y2="10"/></svg>
+    </button>
+  </div>
+
+  <!-- Subject + Share button -->
+  <div class="edp-subject-bar">
+    <div class="edp-subject" id="edp-subject"></div>
+    <button class="edp-share-btn" onclick="toggleSharePopover(event)">
+      <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="2.5" r="1.5"/><circle cx="11" cy="11.5" r="1.5"/><circle cx="3" cy="7" r="1.5"/><line x1="4.5" y1="6.1" x2="9.5" y2="3.4"/><line x1="4.5" y1="7.9" x2="9.5" y2="10.6"/></svg>
+      Share
+    </button>
+    <!-- Share popover (same style as Manage Access popover) -->
+    <div class="edp-share-popover email-access-popover" id="edp-share-popover" style="display:none;">
+      <div class="email-access-popover-title" id="edp-share-title">Email Access</div>
+      <div class="email-access-workspace-row">
+        <div class="workspace-avatar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="white"><polygon points="8,2 14,14 2,14"/></svg>
+        </div>
+        <span class="workspace-name">Workspace Access</span>
+        <div class="access-select" id="edp-share-access-toggle" onclick="toggleShareAccessLevel()">
+          <span id="edp-share-access-label">Access</span>
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4l3 3 3-3"/></svg>
+        </div>
+      </div>
+      <div class="email-access-popover-description" id="edp-share-description">Bodies and attachments of this email are visible to all workspace members.</div>
+      <div class="email-access-search-row">
+        <div class="form-group" style="flex: 1; margin: 0;">
+          <input type="text" class="form-field input-sm" placeholder="Search and add users" />
+        </div>
+        <button class="btn btn-primary btn-smd">Grant access</button>
+      </div>
+      <div class="email-access-user-row">
+        <div class="user-avatar avatar-xs" style="background-image: url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+        <span class="email-access-user-name">Tom Bradley <span style="color: var(--text-muted); font-weight: 400;">(You)</span></span>
+        <span class="email-access-user-status">Access</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scrollable area: email thread only -->
+  <div class="edp-body">
+
+    <!-- VIEW MODE: thread messages -->
+    <div class="edp-view-mode" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;">
+
+      <!-- Thread messages (populated by JS) -->
+      <div id="edp-body" class="edp-thread-list"></div>
+
+    </div>
+
+  </div>
+
+  <!-- Inline reply composer (hidden by default, shown on Reply/Reply All/Forward) -->
+  <div class="edp-inline-composer" id="edp-inline-composer" style="display:none;">
+    <div class="edp-ic-divider"></div>
+    <div class="edp-ic-label">Draft</div>
+    <div class="edp-ic-divider"></div>
+
+    <!-- To row -->
+    <div class="edp-ic-to-row">
+      <span class="edp-ic-to-label">To</span>
+      <div class="edp-ic-to-chips" id="edp-ic-to-chips"></div>
+      <span class="edp-ic-ccbcc" onclick="toggleCcBcc()">Cc / Bcc</span>
+    </div>
+
+    <!-- Cc row (hidden by default) -->
+    <div class="edp-ic-to-row edp-ic-cc-row" id="edp-ic-cc-row" style="display:none;">
+      <span class="edp-ic-to-label">Cc</span>
+      <input type="text" class="edp-ic-cc-input" placeholder="Add recipients…">
+    </div>
+    <!-- Bcc row (hidden by default) -->
+    <div class="edp-ic-to-row edp-ic-bcc-row" id="edp-ic-bcc-row" style="display:none;">
+      <span class="edp-ic-to-label">Bcc</span>
+      <input type="text" class="edp-ic-bcc-input" placeholder="Add recipients…">
+    </div>
+
+    <!-- Body -->
+    <div class="edp-ic-body-wrap">
+      <div class="edp-ic-body" id="edp-ic-body" contenteditable="true" data-placeholder="Start typing your email…"></div>
+      <div class="edp-quoted-toggle">⋯</div>
+    </div>
+
+    <!-- Attachments -->
+    <div class="edp-ic-attachments" id="edp-ic-attachments"></div>
+
+    <!-- Toolbar -->
+    <div class="edp-ic-toolbar">
+      <div class="edp-rt-left">
+        <button class="edp-ic-attach-btn" onclick="document.getElementById('edp-ic-file-input').click()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
+          Add an attachment
+        </button>
+        <input type="file" id="edp-ic-file-input" style="display:none;" onchange="handleIcAttachment(this)" multiple>
+      </div>
+      <div class="edp-rt-right">
+        <button class="edp-rt-btn edp-rt-discard" data-tooltip="Delete draft" onclick="discardInlineComposer()">
+          <svg width="13" height="14" viewBox="0 0 13 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3.5h11"/><path d="M4.5 3.5V2h4v1.5"/><rect x="2" y="3.5" width="9" height="9" rx="1"/><path d="M5 6.5v3.5"/><path d="M8 6.5v3.5"/></svg>
+        </button>
+        <button class="edp-rt-send" id="edp-ic-send-btn" onclick="sendInlineReply()">
+          Send email
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1L1 5l4.5 2L8 12l4-11z"/><path d="M5.5 7L12 1"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

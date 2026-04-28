@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michael Fawler — Contacts — Bonsai</title>
+  <link rel="stylesheet" href="./prototype-kit/styles/application.css" />
+  <link rel="stylesheet" href="styles/layout.css" />
+  <link rel="stylesheet" href="styles/activity-feed.css" />
+  <link rel="stylesheet" href="styles/notes.css" />
+  <link rel="stylesheet" href="styles/tab-emails.css" />
+  <link rel="stylesheet" href="styles/right-sidebar.css" />
+  <link rel="stylesheet" href="styles/modals.css" />
+  <link rel="stylesheet" href="styles/email-panel.css" />
+  <link rel="stylesheet" href="styles/local.css" />
+</head>
+<body>
+<div id="outer-wrapper" class="with-sidebar with-sidebar-expanded">
+  <span id="ph-sidebar"></span>
+  <div class="page-content page-content-with-header">
+    <span id="ph-topbar"></span>
+    <div class="contact-page-body">
+      <div class="contact-content-area">
+        <div class="contact-main-content">
+          <span id="ph-tab-activity"></span>
+          <span id="ph-tab-notes"></span>
+          <span id="ph-tab-emails"></span>
+        </div>
+        <span id="ph-right-sidebar"></span>
+      </div>
+    </div>
+  </div>
+</div>
+<span id="ph-email-panel"></span>
+<span id="ph-modals"></span>
+<div id="toast-notification" class="toast-notification">
+  <span class="toast-dot"></span>
+  <span class="toast-msg"></span>
+  <button class="toast-close" onclick="closeToast()">&#x2715;</button>
+</div>
+<script src="js/loader.js"></script>
+</body>
+</html>
