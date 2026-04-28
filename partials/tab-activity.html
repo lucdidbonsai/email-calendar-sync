@@ -42,7 +42,7 @@
               <div id="upcoming-events-list">
 
                 <!-- Event 1: Today -->
-                <div class="upcoming-event-row">
+                <div class="upcoming-event-row" style="cursor:pointer;" onclick="openMeetingOverlay(10)">
                   <div class="upcoming-event-date-col">
                     <div class="upcoming-event-day-abbr today">MON</div>
                     <div class="upcoming-event-date-num today">27</div>
@@ -65,7 +65,7 @@
                 </div>
 
                 <!-- Event 2: Thursday -->
-                <div class="upcoming-event-row">
+                <div class="upcoming-event-row" style="cursor:pointer;" onclick="openMeetingOverlay(11)">
                   <div class="upcoming-event-date-col">
                     <div class="upcoming-event-day-abbr">THU</div>
                     <div class="upcoming-event-date-num">30</div>
@@ -87,7 +87,7 @@
                 </div>
 
                 <!-- Event 3: Friday -->
-                <div class="upcoming-event-row">
+                <div class="upcoming-event-row" style="cursor:pointer;" onclick="openMeetingOverlay(12)">
                   <div class="upcoming-event-date-col">
                     <div class="upcoming-event-day-abbr">FRI</div>
                     <div class="upcoming-event-date-num">31</div>
@@ -180,23 +180,6 @@
                 </div>
               </div>
 
-              <!-- Meeting completed: Strategic Planning Offsite (basic card in disconnected state) -->
-              <div class="activity-item">
-                <div class="activity-item-left">
-                  <div class="user-avatar avatar-xs" style="background-image: url('https://ui-avatars.com/api/?name=CT&size=250&background=4c525a&color=ffffff&format=png');"></div>
-                  <div class="activity-item-line"></div>
-                </div>
-                <div class="activity-item-body">
-                  <div class="activity-meta"><strong>Chris Taylor</strong> completed a meeting with Michael Fawler &middot; Jan 20, 9:00 AM</div>
-                  <div class="meeting-card">
-                    <div class="meeting-card-icon">
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#22AD01" stroke-width="1.5"><rect x="1" y="3" width="10" height="10" rx="1.5"/><path d="M11 7l4-2v6l-4-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <div class="meeting-card-title">Strategic Planning Offsite</div>
-                  </div>
-                </div>
-              </div>
-
               <!-- Note: Tom Bradley Jan 14 -->
               <div class="activity-item">
                 <div class="activity-item-left">
@@ -211,23 +194,6 @@
                       <a class="note-inline-action note-inline-delete" onclick="deleteNote(this)">Delete</a>
                     </div>
                     Competitive landscape draft reviewed. Michael thinks our TAM estimates for enterprise are conservative — wants us to push <strong>15–20% higher</strong> based on their internal data.
-                  </div>
-                </div>
-              </div>
-
-              <!-- Meeting completed: Product Demo (basic card) -->
-              <div class="activity-item">
-                <div class="activity-item-left">
-                  <div class="user-avatar avatar-xs" style="background-image: url('https://ui-avatars.com/api/?name=CT&size=250&background=4c525a&color=ffffff&format=png');"></div>
-                  <div class="activity-item-line"></div>
-                </div>
-                <div class="activity-item-body">
-                  <div class="activity-meta"><strong>Chris Taylor</strong> completed a meeting with Michael Fawler &middot; Jan 13, 4:00 PM</div>
-                  <div class="meeting-card">
-                    <div class="meeting-card-icon">
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#22AD01" stroke-width="1.5"><rect x="1" y="3" width="10" height="10" rx="1.5"/><path d="M11 7l4-2v6l-4-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </div>
-                    <div class="meeting-card-title">Product Demo &ndash; Enterprise Plan</div>
                   </div>
                 </div>
               </div>
@@ -369,7 +335,7 @@
                 </div>
                 <div class="activity-item-body">
                   <div class="activity-meta"><strong>Chris Taylor</strong> attended a meeting &middot; Jan 20, 9:00 AM</div>
-                  <div class="cal-event-card" onclick="openCalEventModal('Strategic Planning Offsite', 'Jan 20 &middot; 9:00 &ndash; 10:00 AM', 'ct,mf')">
+                  <div class="cal-event-card" onclick="openMeetingOverlay(1)">
                     <div class="cal-event-card-date">
                       <div class="cal-event-card-day-abbr">MON</div>
                       <div class="cal-event-card-day-num">20</div>
@@ -445,7 +411,7 @@
                 </div>
                 <div class="activity-item-body">
                   <div class="activity-meta"><strong>Chris Taylor</strong> attended a meeting &middot; Jan 13, 4:00 PM</div>
-                  <div class="cal-event-card" onclick="openCalEventModal('Product Demo – Enterprise Plan', 'Jan 13 &middot; 4:00 – 5:00 PM', 'ct,mf')">
+                  <div class="cal-event-card" onclick="openMeetingOverlay(2)">
                     <div class="cal-event-card-date">
                       <div class="cal-event-card-day-abbr">MON</div>
                       <div class="cal-event-card-day-num">13</div>
