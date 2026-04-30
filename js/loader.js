@@ -13,6 +13,7 @@
   var appScripts = [
     'data/emails.js',
     'data/contacts.js',
+    'data/meetings.js',
     'js/helpers.js',
     'js/tabs.js',
     'js/notes.js',
