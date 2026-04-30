@@ -1,5 +1,5 @@
   // ── Calendar/Email connection flow ──
-  var calendarConnected = true;
+  var calendarConnected = false;
 
   function openCalendarSettingsModal(provider) {
     document.getElementById('modal-calendar-settings').classList.remove('hidden');
