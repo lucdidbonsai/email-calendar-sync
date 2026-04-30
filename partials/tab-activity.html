@@ -115,7 +115,7 @@
             <div id="activity-note-composer-wrap" style="display:none; margin-bottom: 20px;"></div>
 
             <!-- ═══ DISCONNECTED FEED (no emails, no calendar events) ═══ -->
-            <div id="activity-feed-disconnected" class="activity-feed">
+            <div id="activity-feed-disconnected" class="activity-feed" style="display:none;">
 
               <!-- Client portal message: Michael Fawler (Jan 24) -->
               <div class="activity-item">
@@ -245,7 +245,7 @@
             </div><!-- /activity-feed-disconnected -->
 
             <!-- ═══ CONNECTED FEED (emails + calendar events + all other items) ═══ -->
-            <div id="activity-feed-connected" class="activity-feed" style="display:none;">
+            <div id="activity-feed-connected" class="activity-feed">
 
               <!-- Past section header -->
               <div class="upcoming-section" id="past-events-section" style="margin-bottom: 16px;">
@@ -254,6 +254,7 @@
                   <span class="upcoming-section-label">Past</span>
                 </div>
               </div>
+              <div id="past-events-list">
 
               <!-- Client portal message: Michael Fawler (Jan 24) -->
               <div class="activity-item">
@@ -498,6 +499,7 @@
                 </div>
               </div>
 
+              </div><!-- /past-events-list -->
             </div><!-- /activity-feed-connected -->
 
           </div><!-- /tab-activity -->
