@@ -24,7 +24,7 @@
   function loadScript(src) {
     return new Promise(function (resolve, reject) {
       var s = document.createElement('script');
-      s.src = src;
+      s.src = src + cacheBust;
       s.onload = resolve;
       s.onerror = reject;
       document.body.appendChild(s);
@@ -37,8 +37,10 @@
     }, Promise.resolve());
   }
 
+  var cacheBust = '?v=' + Date.now();
+
   function loadPartial(p) {
-    return fetch(p.src)
+    return fetch(p.src + cacheBust, { cache: 'no-store' })
       .then(function (r) { return r.text(); })
       .then(function (html) {
         var el = document.getElementById(p.id);
