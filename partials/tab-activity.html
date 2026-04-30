@@ -1,7 +1,7 @@
           <div id="tab-activity" class="tab-panel active">
 
             <!-- ═══ SYNC BANNER (dismissed after connecting) ═══ -->
-            <div id="sync-calendar-banner" class="sync-calendar-banner">
+            <div id="sync-calendar-banner" class="sync-calendar-banner" style="display:none;">
               <span class="sync-banner-text">Sync emails and calendar events with your contacts</span>
               <div class="sync-banner-actions">
                 <button class="sync-provider-btn" onclick="openCalendarSettingsModal('google')">
@@ -34,7 +34,7 @@
             </div>
 
             <!-- ═══ UPCOMING EVENTS (shown only after connecting) ═══ -->
-            <div id="upcoming-events-section" style="display:none;" class="upcoming-section">
+            <div id="upcoming-events-section" class="upcoming-section">
               <div class="upcoming-section-header" onclick="toggleUpcomingSection()">
                 <svg class="upcoming-chevron" id="upcoming-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg>
                 <span class="upcoming-section-label">Upcoming</span>
@@ -115,7 +115,7 @@
             <div id="activity-note-composer-wrap" style="display:none; margin-bottom: 20px;"></div>
 
             <!-- ═══ DISCONNECTED FEED (no emails, no calendar events) ═══ -->
-            <div id="activity-feed-disconnected" class="activity-feed">
+            <div id="activity-feed-disconnected" class="activity-feed" style="display:none;">
 
               <!-- Client portal message: Michael Fawler (Jan 24) -->
               <div class="activity-item">
@@ -244,8 +244,16 @@
 
             </div><!-- /activity-feed-disconnected -->
 
+            <!-- ═══ PAST SECTION HEADER ═══ -->
+            <div class="upcoming-section" id="past-events-section">
+              <div class="upcoming-section-header" onclick="togglePastSection()">
+                <svg class="upcoming-chevron" id="past-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg>
+                <span class="upcoming-section-label">Past</span>
+              </div>
+              <div id="past-events-list">
+
             <!-- ═══ CONNECTED FEED (emails + calendar events + all other items) ═══ -->
-            <div id="activity-feed-connected" class="activity-feed" style="display:none;">
+            <div id="activity-feed-connected" class="activity-feed">
 
               <!-- Client portal message: Michael Fawler (Jan 24) -->
               <div class="activity-item">
@@ -491,5 +499,8 @@
               </div>
 
             </div><!-- /activity-feed-connected -->
+
+              </div><!-- /past-events-list -->
+            </div><!-- /past-events-section -->
 
           </div><!-- /tab-activity -->

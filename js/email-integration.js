@@ -1,5 +1,5 @@
   // ── Calendar/Email connection flow ──
-  var calendarConnected = false;
+  var calendarConnected = true;
 
   function openCalendarSettingsModal(provider) {
     document.getElementById('modal-calendar-settings').classList.remove('hidden');
@@ -58,6 +58,18 @@
   function toggleUpcomingSection() {
     var list = document.getElementById('upcoming-events-list');
     var chevron = document.getElementById('upcoming-chevron');
+    if (list.style.display === 'none') {
+      list.style.display = '';
+      chevron.classList.remove('collapsed');
+    } else {
+      list.style.display = 'none';
+      chevron.classList.add('collapsed');
+    }
+  }
+
+  function togglePastSection() {
+    var list = document.getElementById('past-events-list');
+    var chevron = document.getElementById('past-chevron');
     if (list.style.display === 'none') {
       list.style.display = '';
       chevron.classList.remove('collapsed');
