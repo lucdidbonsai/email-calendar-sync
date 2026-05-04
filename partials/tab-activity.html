@@ -16,28 +16,10 @@
               <button class="sync-banner-dismiss" onclick="dismissSyncBanner()" title="Dismiss">&times;</button>
             </div>
 
-            <!-- ═══ TAB TITLE ROW ═══ -->
-            <div class="tab-section-title-row">
-              <span class="tab-section-title">Activity</span>
-              <div class="add-btn-wrap">
-                <div class="dashboard-chart-options showing-xs" style="position: relative;">
-                  <a class="dashboard-chart-option-add-icon" onclick="toggleAddMenu()" title="Add" style="cursor:pointer;">
-                    <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.4062 8.83333H11.6667V2.09375C11.6667 1.21354 10.9219 0.5 10 0.5C9.07812 0.5 8.33333 1.21354 8.33333 2.09375V8.83333H1.59375C0.713542 8.83333 0 9.57812 0 10.5C0 11.4219 0.713542 12.1667 1.59375 12.1667H8.33333V18.9062C8.33333 19.7865 9.07812 20.5 10 20.5C10.9219 20.5 11.6667 19.7865 11.6667 18.9062V12.1667H18.4062C19.2865 12.1667 20 11.4219 20 10.5C20 9.57812 19.2865 8.83333 18.4062 8.83333Z" fill="#22AD01"></path></svg>
-                  </a>
-                  <div class="add-dropdown" id="add-activity-menu">
-                    <div class="field-popup-menu popup-menu-160" style="position: relative; box-shadow: var(--box-shadow-medium);">
-                      <a class="field-popup-menu-list-item" onclick="showActivityNoteComposer()">Add Note</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <!-- ═══ UPCOMING EVENTS (shown only after connecting) ═══ -->
-            <div id="upcoming-events-section" style="display:none;" class="upcoming-section">
-              <div class="upcoming-section-header" onclick="toggleUpcomingSection()">
-                <svg class="upcoming-chevron" id="upcoming-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg>
-                <span class="upcoming-section-label">Upcoming</span>
+            <div id="upcoming-events-section" style="display:none;">
+              <div class="tab-section-title-row" style="margin-bottom: 16px;">
+                <span class="tab-section-title">Upcoming</span>
               </div>
               <div id="upcoming-events-list">
 
@@ -111,6 +93,23 @@
 
               </div><!-- /upcoming-events-list -->
             </div><!-- /upcoming-events-section -->
+
+            <!-- ═══ TAB TITLE ROW ═══ -->
+            <div class="tab-section-title-row">
+              <span class="tab-section-title">Activity</span>
+              <div class="add-btn-wrap">
+                <div class="dashboard-chart-options showing-xs" style="position: relative;">
+                  <a class="dashboard-chart-option-add-icon" onclick="toggleAddMenu()" title="Add" style="cursor:pointer;">
+                    <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.4062 8.83333H11.6667V2.09375C11.6667 1.21354 10.9219 0.5 10 0.5C9.07812 0.5 8.33333 1.21354 8.33333 2.09375V8.83333H1.59375C0.713542 8.83333 0 9.57812 0 10.5C0 11.4219 0.713542 12.1667 1.59375 12.1667H8.33333V18.9062C8.33333 19.7865 9.07812 20.5 10 20.5C10.9219 20.5 11.6667 19.7865 11.6667 18.9062V12.1667H18.4062C19.2865 12.1667 20 11.4219 20 10.5C20 9.57812 19.2865 8.83333 18.4062 8.83333Z" fill="#22AD01"></path></svg>
+                  </a>
+                  <div class="add-dropdown" id="add-activity-menu">
+                    <div class="field-popup-menu popup-menu-160" style="position: relative; box-shadow: var(--box-shadow-medium);">
+                      <a class="field-popup-menu-list-item" onclick="showActivityNoteComposer()">Add Note</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div id="activity-note-composer-wrap" style="display:none; margin-bottom: 20px;"></div>
 
@@ -246,14 +245,6 @@
 
             <!-- ═══ CONNECTED FEED (emails + calendar events + all other items) ═══ -->
             <div id="activity-feed-connected" class="activity-feed">
-
-              <!-- Past section header -->
-              <div class="upcoming-section" id="past-events-section" style="margin-bottom: 16px;">
-                <div class="upcoming-section-header" onclick="togglePastSection()">
-                  <svg class="upcoming-chevron" id="past-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg>
-                  <span class="upcoming-section-label">Past</span>
-                </div>
-              </div>
               <div id="past-events-list">
 
               <!-- Client portal message: Michael Fawler (Jan 24) -->
