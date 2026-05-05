@@ -244,6 +244,82 @@
     document.getElementById('meeting-overlay-modal').classList.add('hidden');
   }
 
+  function openCalendarEventDrawer(id) {
+    var m = pastMeetingData[id];
+    if (!m) return;
+
+    document.getElementById('ced-kind-label').textContent = m.upcoming ? 'Upcoming meeting' : 'Past meeting';
+
+    var badgeClass = m.upcoming ? 'ced-status-badge--upcoming' : 'ced-status-badge--past';
+    var badgeDotColor = m.upcoming ? '#5db6f8' : '#22AD01';
+    var badgeLabel = m.upcoming ? 'Upcoming' : 'Attended';
+
+    var videoSVG = '<svg width="13" height="13" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3"/></svg>';
+    var clockSVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+    var alignSVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="12" x2="3" y2="12"/><line x1="21" y1="18" x2="9" y2="18"/></svg>';
+    var linkSVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
+
+    var joinHTML = (m.upcoming && m.link)
+      ? '<a class="ced-join-btn" href="' + m.link + '" target="_blank" onclick="event.stopPropagation();">' +
+          videoSVG + 'Join meeting' +
+        '</a>'
+      : '';
+
+    var linkHTML = m.link
+      ? '<div class="ced-field">' +
+          '<span class="ced-field-icon">' + linkSVG + '</span>' +
+          '<div><div class="ced-field-label">Meeting link</div>' +
+          '<div class="ced-field-value ced-field-value--link">' + m.link + '</div></div>' +
+        '</div>'
+      : '';
+
+    var participantsHTML = m.participants.map(function(p) {
+      return '<div class="ced-participant-row">' +
+        '<div class="ced-participant-avatar" style="background-image:url(\'' + p.img + '\');"></div>' +
+        '<div class="ced-participant-info">' +
+          '<div class="ced-participant-name">' + p.name + '</div>' +
+          '<div class="ced-participant-email">' + p.email + '</div>' +
+        '</div>' +
+        (p.role ? '<span class="ced-participant-role">' + p.role + '</span>' : '') +
+        (!m.upcoming ? '<span class="ced-participant-attended"><span class="ced-participant-attended-dot"></span> Attended</span>' : '') +
+      '</div>';
+    }).join('');
+
+    document.getElementById('ced-body').innerHTML =
+      '<div class="ced-title-block">' +
+        '<div class="ced-date-widget">' +
+          '<div class="ced-date-widget-day">' + (m.day || '') + '</div>' +
+          '<div class="ced-date-widget-num">' + m.date + '</div>' +
+          '<div class="ced-date-widget-month">' + (m.month || '') + '</div>' +
+        '</div>' +
+        '<div style="flex:1;min-width:0;">' +
+          '<div class="ced-event-title">' + m.title + '</div>' +
+          '<div class="ced-event-time">' + m.time + ' &middot; ' + m.duration + '</div>' +
+          '<div class="ced-status-badge ' + badgeClass + '">' +
+            '<span class="ced-status-dot" style="background:' + badgeDotColor + ';"></span>' +
+            badgeLabel +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      joinHTML +
+      '<div class="ced-field">' +
+        '<span class="ced-field-icon">' + alignSVG + '</span>' +
+        '<div><div class="ced-field-label">Description</div>' +
+        '<div class="ced-field-value">' + m.description + '</div></div>' +
+      '</div>' +
+      linkHTML +
+      '<div class="ced-section-label">Participants <span style="color:#c0c4c6;font-weight:400;">' + m.participants.length + '</span></div>' +
+      participantsHTML;
+
+    document.getElementById('cal-event-drawer-backdrop').classList.add('open');
+    document.getElementById('cal-event-drawer').classList.add('open');
+  }
+
+  function closeCalendarEventDrawer() {
+    document.getElementById('cal-event-drawer-backdrop').classList.remove('open');
+    document.getElementById('cal-event-drawer').classList.remove('open');
+  }
+
   function handleMeetingOverlayClick(e) {
     if (e.target === document.getElementById('meeting-overlay-modal')) {
       closeMeetingOverlay();

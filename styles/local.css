@@ -2333,3 +2333,224 @@
   color: #ffffff !important;
   text-decoration: none !important;
 }
+
+/* ── Upcoming Event Card (Exploration 3 layout + Exploration 1 green rail) ── */
+#upcoming-events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.uec-card {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid #ececec;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.uec-card:hover { background: #fafafa; }
+.uec-rail {
+  width: 3px;
+  background: #22AD01;
+  flex-shrink: 0;
+}
+.uec-date-col {
+  width: 60px;
+  text-align: center;
+  border-right: 1px solid #f5f5f5;
+  padding: 12px 0;
+  flex-shrink: 0;
+}
+.uec-day-abbr {
+  font-size: 10px;
+  font-weight: 600;
+  color: #22AD01;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+.uec-day-num {
+  font-size: 22px;
+  font-weight: 600;
+  color: #121212;
+  line-height: 1;
+}
+.uec-day-month {
+  font-size: 10px;
+  color: #96a6a2;
+  margin-top: 2px;
+}
+.uec-body {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.uec-title {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #121212;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.uec-time {
+  font-size: 12px;
+  color: #616161;
+}
+.uec-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+.uec-avatars { display: flex; align-items: center; }
+.uec-avatar {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 1.5px solid #fff;
+  background-size: cover; background-position: center;
+  background-color: #e0e0e0;
+  flex-shrink: 0; display: inline-block;
+}
+.uec-join-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: center;
+  flex-shrink: 0;
+  margin: 0 14px;
+  background: #22AD01;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 11px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+}
+.uec-join-btn:hover { background: #1e9a01; }
+
+/* ── Calendar Event Side Drawer ── */
+.ced-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(18,18,18,0.18);
+  z-index: 9998;
+  display: none;
+}
+.ced-backdrop.open { display: block; }
+.cal-event-drawer {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: 460px;
+  background: #fff;
+  border-left: 1px solid #ececec;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.06);
+  z-index: 9999;
+  display: flex; flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+.cal-event-drawer.open { transform: translateX(0); }
+.ced-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 20px;
+  border-bottom: 1px solid #ececec;
+  flex-shrink: 0;
+}
+.ced-kind-label {
+  font-size: 12px; font-weight: 600;
+  color: #96a6a2; text-transform: uppercase; letter-spacing: 0.06em;
+}
+.ced-close-btn {
+  width: 28px; height: 28px; border-radius: 6px;
+  border: 0; background: transparent; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #616161; flex-shrink: 0;
+}
+.ced-close-btn:hover { background: #f5f5f5; }
+.ced-body {
+  flex: 1; overflow-y: auto; padding: 20px;
+}
+.ced-title-block {
+  display: flex; gap: 14px; margin-bottom: 18px;
+}
+.ced-date-widget {
+  width: 56px; flex-shrink: 0; text-align: center;
+  border: 1px solid #ececec; border-radius: 8px;
+  padding: 6px 0; background: #fcfcfc;
+}
+.ced-date-widget-day {
+  font-size: 10px; font-weight: 600;
+  color: #96a6a2; letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.ced-date-widget-num {
+  font-size: 22px; font-weight: 600;
+  color: #121212; line-height: 1;
+}
+.ced-date-widget-month { font-size: 10px; color: #96a6a2; margin-top: 2px; }
+.ced-event-title {
+  font-size: 17px; font-weight: 600; color: #121212; line-height: 1.3;
+}
+.ced-event-time { margin-top: 6px; font-size: 13px; color: #616161; }
+.ced-status-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  margin-top: 8px; height: 22px; padding: 0 8px;
+  border-radius: 4px; font-size: 11px; font-weight: 500;
+}
+.ced-status-badge--upcoming { background: rgba(93,182,248,0.14); color: #1a72ba; }
+.ced-status-badge--past { background: rgba(34,173,1,0.10); color: #22AD01; }
+.ced-status-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.ced-join-btn {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  width: 100%; height: 36px; margin-bottom: 18px;
+  border: 0; border-radius: 6px; cursor: pointer;
+  background: #22AD01; color: #fff !important;
+  font-size: 13px; font-weight: 500; text-decoration: none !important;
+}
+.ced-join-btn:hover { background: #1e9a01; color: #fff !important; }
+.ced-field {
+  display: flex; gap: 10px; align-items: flex-start; margin-bottom: 14px;
+}
+.ced-field-icon { color: #96a6a2; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; }
+.ced-field-label {
+  font-size: 11px; font-weight: 500; color: #96a6a2;
+  text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 3px;
+}
+.ced-field-value { font-size: 13px; color: #3a3a3a; line-height: 1.5; word-break: break-word; }
+.ced-field-value--link { color: #1a72ba; text-decoration: underline; word-break: break-all; }
+.ced-section-label {
+  font-size: 11px; font-weight: 600; color: #96a6a2;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-bottom: 10px; margin-top: 4px;
+}
+.ced-participant-row {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+}
+.ced-participant-avatar {
+  width: 26px; height: 26px; border-radius: 50%;
+  background-size: cover; background-position: center;
+  flex-shrink: 0; border: 1.5px solid #fff;
+  background-color: #e0e0e0;
+}
+.ced-participant-info { flex: 1; min-width: 0; }
+.ced-participant-name { font-size: 13px; font-weight: 500; color: #121212; }
+.ced-participant-email {
+  font-size: 12px; color: #96a6a2;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.ced-participant-role { font-size: 11px; color: #96a6a2; flex-shrink: 0; }
+.ced-participant-attended {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 500; color: #22AD01; flex-shrink: 0;
+}
+.ced-participant-attended-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #22AD01;
+}

@@ -24,71 +24,77 @@
               <div id="upcoming-events-list">
 
                 <!-- Event 1: Today -->
-                <div class="upcoming-event-row" style="cursor:pointer;" onclick="openMeetingOverlay(10)">
-                  <div class="upcoming-event-date-col">
-                    <div class="upcoming-event-day-abbr today">MON</div>
-                    <div class="upcoming-event-date-num today">27</div>
+                <div class="uec-card" onclick="openCalendarEventDrawer(10)">
+                  <span class="uec-rail"></span>
+                  <div class="uec-date-col">
+                    <div class="uec-day-abbr">MON</div>
+                    <div class="uec-day-num">27</div>
+                    <div class="uec-day-month">Apr</div>
                   </div>
-                  <div class="upcoming-event-body">
-                    <div class="upcoming-event-title">Q1 Strategy Review &ndash; TechStart Labs</div>
-                    <div class="upcoming-event-time">Today &middot; 2:00 &ndash; 3:00 PM</div>
-                    <div class="upcoming-event-footer">
-                      <div class="upcoming-event-avatars">
-                        <div class="user-avatar" style="width:22px;height:22px;border-radius:50%;border:2px solid white;background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');background-size:cover;margin-right:-6px;flex-shrink:0;"></div>
-                        <div class="user-avatar" style="width:22px;height:22px;border-radius:50%;border:2px solid white;background-image:url('https://randomuser.me/api/portraits/men/32.jpg');background-size:cover;margin-right:-6px;flex-shrink:0;"></div>
-                        <div class="user-avatar" style="width:22px;height:22px;border-radius:50%;border:2px solid white;background-image:url('https://ui-avatars.com/api/?name=LD&size=80&background=4c6ef5&color=ffffff&format=png');background-size:cover;flex-shrink:0;"></div>
+                  <div class="uec-body">
+                    <div class="uec-title">Q1 Strategy Review &ndash; TechStart Labs</div>
+                    <div class="uec-time">Today &middot; 2:00 &ndash; 3:00 PM &middot; 1h</div>
+                    <div class="uec-footer">
+                      <div class="uec-avatars">
+                        <div class="uec-avatar" style="background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');margin-right:-6px;"></div>
+                        <div class="uec-avatar" style="background-image:url('https://randomuser.me/api/portraits/men/32.jpg');margin-right:-6px;"></div>
+                        <div class="uec-avatar" style="background-image:url('https://ui-avatars.com/api/?name=LD&size=80&background=4c6ef5&color=ffffff&format=png');"></div>
                       </div>
-                      <button class="upcoming-join-btn">
-                        <svg width="12" height="10" viewBox="0 0 16 12" fill="none" stroke="white" stroke-width="1.8"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        Join
-                      </button>
                     </div>
                   </div>
+                  <button class="uec-join-btn" onclick="event.stopPropagation();">
+                    <svg width="12" height="10" viewBox="0 0 16 12" fill="none" stroke="white" stroke-width="1.8"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Join
+                  </button>
                 </div>
 
                 <!-- Event 2: Thursday -->
-                <div class="upcoming-event-row" style="cursor:pointer;" onclick="openMeetingOverlay(11)">
-                  <div class="upcoming-event-date-col">
-                    <div class="upcoming-event-day-abbr">THU</div>
-                    <div class="upcoming-event-date-num">30</div>
+                <div class="uec-card" onclick="openCalendarEventDrawer(11)">
+                  <span class="uec-rail"></span>
+                  <div class="uec-date-col">
+                    <div class="uec-day-abbr">THU</div>
+                    <div class="uec-day-num">30</div>
+                    <div class="uec-day-month">Apr</div>
                   </div>
-                  <div class="upcoming-event-body">
-                    <div class="upcoming-event-title">Brand Refresh &ndash; Mood Board Review</div>
-                    <div class="upcoming-event-time">Thursday &middot; 10:00 &ndash; 11:30 AM</div>
-                    <div class="upcoming-event-footer">
-                      <div class="upcoming-event-avatars">
-                        <div class="user-avatar" style="width:22px;height:22px;border-radius:50%;border:2px solid white;background-image:url('https://randomuser.me/api/portraits/men/32.jpg');background-size:cover;margin-right:-6px;flex-shrink:0;"></div>
-                        <div class="user-avatar" style="width:22px;height:22px;border-radius:50%;border:2px solid white;background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');background-size:cover;flex-shrink:0;"></div>
+                  <div class="uec-body">
+                    <div class="uec-title">Brand Refresh &ndash; Mood Board Review</div>
+                    <div class="uec-time">Thursday &middot; 10:00 &ndash; 11:30 AM &middot; 1h 30m</div>
+                    <div class="uec-footer">
+                      <div class="uec-avatars">
+                        <div class="uec-avatar" style="background-image:url('https://randomuser.me/api/portraits/men/32.jpg');margin-right:-6px;"></div>
+                        <div class="uec-avatar" style="background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');"></div>
                       </div>
-                      <button class="upcoming-join-btn">
-                        <svg width="12" height="10" viewBox="0 0 16 12" fill="none" stroke="white" stroke-width="1.8"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        Join
-                      </button>
                     </div>
                   </div>
+                  <button class="uec-join-btn" onclick="event.stopPropagation();">
+                    <svg width="12" height="10" viewBox="0 0 16 12" fill="none" stroke="white" stroke-width="1.8"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Join
+                  </button>
                 </div>
 
                 <!-- Event 3: Friday -->
-                <div class="upcoming-event-row" style="cursor:pointer;" onclick="openMeetingOverlay(12)">
-                  <div class="upcoming-event-date-col">
-                    <div class="upcoming-event-day-abbr">FRI</div>
-                    <div class="upcoming-event-date-num">31</div>
+                <div class="uec-card" onclick="openCalendarEventDrawer(12)">
+                  <span class="uec-rail"></span>
+                  <div class="uec-date-col">
+                    <div class="uec-day-abbr">FRI</div>
+                    <div class="uec-day-num">1</div>
+                    <div class="uec-day-month">May</div>
                   </div>
-                  <div class="upcoming-event-body">
-                    <div class="upcoming-event-title">Market Entry Strategy &ndash; Final Review</div>
-                    <div class="upcoming-event-time">Friday &middot; 3:30 &ndash; 4:00 PM</div>
-                    <div class="upcoming-event-footer">
-                      <div class="upcoming-event-avatars">
-                        <div class="user-avatar" style="width:22px;height:22px;border-radius:50%;border:2px solid white;background-image:url('https://ui-avatars.com/api/?name=AC&size=80&background=e67e22&color=ffffff&format=png');background-size:cover;margin-right:-6px;flex-shrink:0;"></div>
-                        <div class="user-avatar" style="width:22px;height:22px;border-radius:50%;border:2px solid white;background-image:url('https://randomuser.me/api/portraits/men/32.jpg');background-size:cover;margin-right:-6px;flex-shrink:0;"></div>
-                        <div class="user-avatar" style="width:22px;height:22px;border-radius:50%;border:2px solid white;background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');background-size:cover;flex-shrink:0;"></div>
+                  <div class="uec-body">
+                    <div class="uec-title">Market Entry Strategy &ndash; Final Review</div>
+                    <div class="uec-time">Friday &middot; 3:30 &ndash; 4:00 PM &middot; 30m</div>
+                    <div class="uec-footer">
+                      <div class="uec-avatars">
+                        <div class="uec-avatar" style="background-image:url('https://ui-avatars.com/api/?name=AC&size=80&background=e67e22&color=ffffff&format=png');margin-right:-6px;"></div>
+                        <div class="uec-avatar" style="background-image:url('https://randomuser.me/api/portraits/men/32.jpg');margin-right:-6px;"></div>
+                        <div class="uec-avatar" style="background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');"></div>
                       </div>
-                      <button class="upcoming-join-btn">
-                        <svg width="12" height="10" viewBox="0 0 16 12" fill="none" stroke="white" stroke-width="1.8"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        Join
-                      </button>
                     </div>
                   </div>
+                  <button class="uec-join-btn" onclick="event.stopPropagation();">
+                    <svg width="12" height="10" viewBox="0 0 16 12" fill="none" stroke="white" stroke-width="1.8"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Join
+                  </button>
                 </div>
 
               </div><!-- /upcoming-events-list -->
@@ -335,7 +341,7 @@
                 </div>
                 <div class="activity-item-body">
                   <div class="activity-meta"><strong>Chris Taylor</strong> attended a meeting &middot; Jan 20, 9:00 AM</div>
-                  <div class="cal-event-card" onclick="openMeetingOverlay(1)">
+                  <div class="cal-event-card" onclick="openCalendarEventDrawer(1)">
                     <div class="cal-event-card-date">
                       <div class="cal-event-card-day-abbr">MON</div>
                       <div class="cal-event-card-day-num">20</div>
@@ -411,7 +417,7 @@
                 </div>
                 <div class="activity-item-body">
                   <div class="activity-meta"><strong>Chris Taylor</strong> attended a meeting &middot; Jan 13, 4:00 PM</div>
-                  <div class="cal-event-card" onclick="openMeetingOverlay(2)">
+                  <div class="cal-event-card" onclick="openCalendarEventDrawer(2)">
                     <div class="cal-event-card-date">
                       <div class="cal-event-card-day-abbr">MON</div>
                       <div class="cal-event-card-day-num">13</div>
