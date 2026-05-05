@@ -43,6 +43,9 @@
     if (feedDisconnected) feedDisconnected.style.display = 'none';
     if (feedConnected) feedConnected.style.display = '';
 
+    // Show past calendar event items in activity feed
+    document.querySelectorAll('.cal-event-activity-item').forEach(function(el) { el.style.display = 'flex'; });
+
     // Activate emails tab connected state
     showEmailConnected(true);
 
@@ -311,12 +314,12 @@
       '<div class="ced-section-label">Participants <span style="color:#c0c4c6;font-weight:400;">' + m.participants.length + '</span></div>' +
       participantsHTML;
 
-    document.getElementById('cal-event-drawer-backdrop').classList.add('open');
+    document.getElementById('outer-wrapper').classList.add('cal-drawer-open');
     document.getElementById('cal-event-drawer').classList.add('open');
   }
 
   function closeCalendarEventDrawer() {
-    document.getElementById('cal-event-drawer-backdrop').classList.remove('open');
+    document.getElementById('outer-wrapper').classList.remove('cal-drawer-open');
     document.getElementById('cal-event-drawer').classList.remove('open');
   }
 

@@ -2437,20 +2437,20 @@
 }
 .uec-join-btn:hover { background: #1e9a01; }
 
-/* ── Calendar Event Side Drawer ── */
-.ced-backdrop {
-  position: fixed; inset: 0;
-  background: rgba(18,18,18,0.18);
-  z-index: 9998;
-  display: none;
+/* ── Calendar Event Side Drawer (push style — no backdrop) ── */
+.ced-backdrop { display: none; } /* kept in DOM but never shown */
+#outer-wrapper {
+  transition: padding-right 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.ced-backdrop.open { display: block; }
+#outer-wrapper.cal-drawer-open {
+  padding-right: 460px;
+}
 .cal-event-drawer {
   position: fixed; top: 0; right: 0; bottom: 0;
   width: 460px;
   background: #fff;
   border-left: 1px solid #ececec;
-  box-shadow: -10px 0 30px rgba(0,0,0,0.06);
+  box-shadow: -4px 0 24px rgba(0,0,0,0.08);
   z-index: 9999;
   display: flex; flex-direction: column;
   transform: translateX(100%);
@@ -2458,6 +2458,8 @@
   overflow: hidden;
 }
 .cal-event-drawer.open { transform: translateX(0); }
+/* Past calendar events hidden until Google account connected */
+.cal-event-activity-item { display: none; }
 .ced-header {
   display: flex; align-items: center; gap: 10px;
   padding: 14px 20px;
