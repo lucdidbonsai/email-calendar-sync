@@ -219,6 +219,7 @@
     }
 
     inlineComposerMode = mode;
+    // Show inline composer
     composer.style.display = 'block';
     body.innerHTML = '';
 
@@ -275,15 +276,13 @@
   }
 
   function updateActionBtnStates(activeMode) {
-    var btns = document.querySelectorAll('.edp-action-btn');
-    btns.forEach(function(btn) {
-      var tooltip = btn.getAttribute('data-tooltip');
-      if (!tooltip) return;
-      var btnMode = tooltip === 'Reply' ? 'reply' : tooltip === 'Reply all' ? 'replyall' : tooltip === 'Forward' ? 'forward' : null;
-      if (btnMode === activeMode) {
-        btn.classList.add('edp-action-btn--active');
+    ['reply', 'replyall', 'forward'].forEach(function(mode) {
+      var tab = document.getElementById('edp-ic-tab-' + mode);
+      if (!tab) return;
+      if (mode === activeMode) {
+        tab.classList.add('edp-ic-tab--active');
       } else {
-        btn.classList.remove('edp-action-btn--active');
+        tab.classList.remove('edp-ic-tab--active');
       }
     });
   }

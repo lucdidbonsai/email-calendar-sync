@@ -18,86 +18,181 @@
 
             <!-- ═══ UPCOMING EVENTS (shown only after connecting) ═══ -->
             <div id="upcoming-events-section" style="display:none;">
-              <div class="tab-section-title-row" style="margin-bottom: 16px;">
+              <div class="tab-section-title-row" style="margin-bottom: 14px;">
                 <span class="tab-section-title">Upcoming</span>
               </div>
               <div id="upcoming-events-list">
 
                 <!-- Event 1: Today -->
-                <div class="uec-card" onclick="openCalendarEventDrawer(10)">
-                  <span class="uec-rail"></span>
-                  <div class="uec-date-col">
-                    <div class="uec-day-abbr">MON</div>
-                    <div class="uec-day-num">27</div>
-                    <div class="uec-day-month">Apr</div>
+                <div class="uec-row" onclick="openCalendarEventDrawer(10)">
+                  <div class="uec-row-left">
+                    <div class="uec-row-day-label">Today</div>
+                    <div class="uec-row-time">2:00pm</div>
                   </div>
-                  <div class="uec-body">
-                    <div class="uec-title">Q1 Strategy Review &ndash; TechStart Labs</div>
-                    <div class="uec-time">Today &middot; 2:00 &ndash; 3:00 PM &middot; 1h</div>
-                    <div class="uec-footer">
-                      <div class="uec-avatars">
-                        <div class="uec-avatar" style="background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');margin-right:-6px;"></div>
-                        <div class="uec-avatar" style="background-image:url('https://randomuser.me/api/portraits/men/32.jpg');margin-right:-6px;"></div>
-                        <div class="uec-avatar" style="background-image:url('https://ui-avatars.com/api/?name=LD&size=80&background=4c6ef5&color=ffffff&format=png');"></div>
-                      </div>
+                  <div class="uec-row-body">
+                    <div class="uec-row-title">Q1 Strategy Review &ndash; TechStart Labs</div>
+                    <div class="uec-row-meta">
+                      <span class="uec-row-meta-item"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1h</span>
+                      <span class="uec-row-meta-sep"></span>
+                      <span class="uec-row-meta-item"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>Zoom</span>
                     </div>
                   </div>
-                  <button class="uec-join-btn" onclick="event.stopPropagation();">
-                    <svg width="12" height="10" viewBox="0 0 16 12" fill="none" stroke="white" stroke-width="1.8"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    Join
-                  </button>
+                  <div class="uec-row-avatars">
+                    <div class="uec-row-avatar" style="background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');"></div>
+                    <div class="uec-row-avatar" style="background-image:url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+                    <div class="uec-row-avatar" style="background-image:url('https://ui-avatars.com/api/?name=LD&size=80&background=4c6ef5&color=ffffff&format=png');"></div>
+                  </div>
+                  <div class="uec-row-actions">
+                    <button class="uec-row-join-btn" onclick="event.stopPropagation();">
+                      <svg width="11" height="9" viewBox="0 0 16 12" fill="none" stroke="white" stroke-width="1.8"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      Join
+                    </button>
+                    <button class="uec-row-dots-btn" onclick="event.stopPropagation();">···</button>
+                  </div>
                 </div>
 
                 <!-- Event 2: Thursday -->
-                <div class="uec-card" onclick="openCalendarEventDrawer(11)">
-                  <span class="uec-rail"></span>
-                  <div class="uec-date-col">
-                    <div class="uec-day-abbr">THU</div>
-                    <div class="uec-day-num">30</div>
-                    <div class="uec-day-month">Apr</div>
+                <div class="uec-row" onclick="openCalendarEventDrawer(11)">
+                  <div class="uec-row-left">
+                    <div class="uec-row-day-label">Thu</div>
+                    <div class="uec-row-time">10:30am</div>
                   </div>
-                  <div class="uec-body">
-                    <div class="uec-title">Brand Refresh &ndash; Mood Board Review</div>
-                    <div class="uec-time">Thursday &middot; 10:00 &ndash; 11:30 AM &middot; 1h 30m</div>
-                    <div class="uec-footer">
-                      <div class="uec-avatars">
-                        <div class="uec-avatar" style="background-image:url('https://randomuser.me/api/portraits/men/32.jpg');margin-right:-6px;"></div>
-                        <div class="uec-avatar" style="background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');"></div>
-                      </div>
+                  <div class="uec-row-body">
+                    <div class="uec-row-title">Brand Refresh &ndash; Mood Board Review</div>
+                    <div class="uec-row-meta">
+                      <span class="uec-row-meta-item"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1h 30m</span>
+                      <span class="uec-row-meta-sep"></span>
+                      <span class="uec-row-meta-item"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>Google Meet</span>
                     </div>
                   </div>
-                  <button class="uec-join-btn" onclick="event.stopPropagation();">
-                    <svg width="12" height="10" viewBox="0 0 16 12" fill="none" stroke="white" stroke-width="1.8"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    Join
-                  </button>
+                  <div class="uec-row-avatars">
+                    <div class="uec-row-avatar" style="background-image:url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+                    <div class="uec-row-avatar" style="background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');"></div>
+                  </div>
+                  <div class="uec-row-actions">
+                    <button class="uec-row-join-btn" onclick="event.stopPropagation();">
+                      <svg width="11" height="9" viewBox="0 0 16 12" fill="none" stroke="white" stroke-width="1.8"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      Join
+                    </button>
+                    <button class="uec-row-dots-btn" onclick="event.stopPropagation();">···</button>
+                  </div>
                 </div>
 
                 <!-- Event 3: Friday -->
-                <div class="uec-card" onclick="openCalendarEventDrawer(12)">
-                  <span class="uec-rail"></span>
-                  <div class="uec-date-col">
-                    <div class="uec-day-abbr">FRI</div>
-                    <div class="uec-day-num">1</div>
-                    <div class="uec-day-month">May</div>
+                <div class="uec-row" onclick="openCalendarEventDrawer(12)">
+                  <div class="uec-row-left">
+                    <div class="uec-row-day-label">Fri</div>
+                    <div class="uec-row-time">3:30pm</div>
                   </div>
-                  <div class="uec-body">
-                    <div class="uec-title">Market Entry Strategy &ndash; Final Review</div>
-                    <div class="uec-time">Friday &middot; 3:30 &ndash; 4:00 PM &middot; 30m</div>
-                    <div class="uec-footer">
-                      <div class="uec-avatars">
-                        <div class="uec-avatar" style="background-image:url('https://ui-avatars.com/api/?name=AC&size=80&background=e67e22&color=ffffff&format=png');margin-right:-6px;"></div>
-                        <div class="uec-avatar" style="background-image:url('https://randomuser.me/api/portraits/men/32.jpg');margin-right:-6px;"></div>
-                        <div class="uec-avatar" style="background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');"></div>
-                      </div>
+                  <div class="uec-row-body">
+                    <div class="uec-row-title">Market Entry Strategy &ndash; Final Review</div>
+                    <div class="uec-row-meta">
+                      <span class="uec-row-meta-item"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>30m</span>
+                      <span class="uec-row-meta-sep"></span>
+                      <span class="uec-row-meta-item"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>Zoom</span>
                     </div>
                   </div>
-                  <button class="uec-join-btn" onclick="event.stopPropagation();">
-                    <svg width="12" height="10" viewBox="0 0 16 12" fill="none" stroke="white" stroke-width="1.8"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    Join
-                  </button>
+                  <div class="uec-row-avatars">
+                    <div class="uec-row-avatar" style="background-image:url('https://randomuser.me/api/portraits/women/44.jpg');"></div>
+                    <div class="uec-row-avatar" style="background-image:url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+                    <div class="uec-row-avatar" style="background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');"></div>
+                  </div>
+                  <div class="uec-row-actions">
+                    <button class="uec-row-join-btn" onclick="event.stopPropagation();">
+                      <svg width="11" height="9" viewBox="0 0 16 12" fill="none" stroke="white" stroke-width="1.8"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      Join
+                    </button>
+                    <button class="uec-row-dots-btn" onclick="event.stopPropagation();">···</button>
+                  </div>
+                </div>
+
+                <!-- Event 4: Next Monday (hidden initially) -->
+                <div class="uec-row" onclick="openCalendarEventDrawer(13)">
+                  <div class="uec-row-left">
+                    <div class="uec-row-day-label">Mon, May 19</div>
+                    <div class="uec-row-time">9:00am</div>
+                  </div>
+                  <div class="uec-row-body">
+                    <div class="uec-row-title">Northwind &mdash; Proposal Walkthrough</div>
+                    <div class="uec-row-meta">
+                      <span class="uec-row-meta-item"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1h</span>
+                      <span class="uec-row-meta-sep"></span>
+                      <span class="uec-row-meta-item"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>Zoom</span>
+                    </div>
+                  </div>
+                  <div class="uec-row-avatars">
+                    <div class="uec-row-avatar" style="background-image:url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+                    <div class="uec-row-avatar" style="background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');"></div>
+                  </div>
+                  <div class="uec-row-actions">
+                    <button class="uec-row-join-btn" onclick="event.stopPropagation();">
+                      <svg width="11" height="9" viewBox="0 0 16 12" fill="none" stroke="white" stroke-width="1.8"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      Join
+                    </button>
+                    <button class="uec-row-dots-btn" onclick="event.stopPropagation();">···</button>
+                  </div>
+                </div>
+
+                <!-- Event 5: Next Wednesday -->
+                <div class="uec-row" onclick="openCalendarEventDrawer(14)">
+                  <div class="uec-row-left">
+                    <div class="uec-row-day-label">Wed, May 21</div>
+                    <div class="uec-row-time">1:00pm</div>
+                  </div>
+                  <div class="uec-row-body">
+                    <div class="uec-row-title">Renewal Kickoff &mdash; TechStart Labs</div>
+                    <div class="uec-row-meta">
+                      <span class="uec-row-meta-item"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1h</span>
+                      <span class="uec-row-meta-sep"></span>
+                      <span class="uec-row-meta-item"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>Google Meet</span>
+                    </div>
+                  </div>
+                  <div class="uec-row-avatars">
+                    <div class="uec-row-avatar" style="background-image:url('https://ui-avatars.com/api/?name=CT&size=80&background=4c525a&color=ffffff&format=png');"></div>
+                    <div class="uec-row-avatar" style="background-image:url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+                    <div class="uec-row-avatar" style="background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');"></div>
+                  </div>
+                  <div class="uec-row-actions">
+                    <button class="uec-row-join-btn" onclick="event.stopPropagation();">
+                      <svg width="11" height="9" viewBox="0 0 16 12" fill="none" stroke="white" stroke-width="1.8"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      Join
+                    </button>
+                    <button class="uec-row-dots-btn" onclick="event.stopPropagation();">···</button>
+                  </div>
+                </div>
+
+                <!-- Event 6: Next Friday (hidden initially) -->
+                <div class="uec-row" onclick="openCalendarEventDrawer(15)">
+                  <div class="uec-row-left">
+                    <div class="uec-row-day-label">Fri, May 23</div>
+                    <div class="uec-row-time">9:00am</div>
+                  </div>
+                  <div class="uec-row-body">
+                    <div class="uec-row-title">Coffee &mdash; Catch Up</div>
+                    <div class="uec-row-meta">
+                      <span class="uec-row-meta-item"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>30m</span>
+                      <span class="uec-row-meta-sep"></span>
+                      <span class="uec-row-meta-item"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 11c0 3.314-3.134 6-7 6s-7-2.686-7-6 3.134-6 7-6c1.04 0 2.026.21 2.9.583"/><path d="M20 4c0 2.21-1.343 4-3 4s-3-1.79-3-4 1.343-4 3-4 3 1.79 3 4z"/></svg>Sightglass Coffee</span>
+                    </div>
+                  </div>
+                  <div class="uec-row-avatars">
+                    <div class="uec-row-avatar" style="background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');"></div>
+                    <div class="uec-row-avatar" style="background-image:url('https://randomuser.me/api/portraits/men/32.jpg');"></div>
+                  </div>
+                  <div class="uec-row-actions">
+                    <button class="uec-row-join-btn" onclick="event.stopPropagation();">
+                      <svg width="11" height="9" viewBox="0 0 16 12" fill="none" stroke="white" stroke-width="1.8"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      Join
+                    </button>
+                    <button class="uec-row-dots-btn" onclick="event.stopPropagation();">···</button>
+                  </div>
                 </div>
 
               </div><!-- /upcoming-events-list -->
+              <div class="uec-show-more" id="uec-show-more" onclick="toggleShowMoreEvents()">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg>
+                <span id="uec-show-more-label">Show 1 more</span>
+              </div>
             </div><!-- /upcoming-events-section -->
 
             <!-- ═══ TAB TITLE ROW ═══ -->
@@ -341,22 +436,18 @@
                 </div>
                 <div class="activity-item-body">
                   <div class="activity-meta"><strong>Chris Taylor</strong> attended a meeting &middot; Jan 20, 9:00 AM</div>
-                  <div class="uec-card" onclick="openCalendarEventDrawer(1)">
-                    <span class="uec-rail"></span>
-                    <div class="uec-date-col">
-                      <div class="uec-day-abbr">MON</div>
-                      <div class="uec-day-num">20</div>
-                      <div class="uec-day-month">Jan</div>
-                    </div>
-                    <div class="uec-body">
-                      <div class="uec-title">Strategic Planning Offsite</div>
-                      <div class="uec-time">Jan 20 &middot; 9:00 &ndash; 10:00 AM &middot; 1h</div>
-                      <div class="uec-footer">
-                        <div class="uec-avatars">
-                          <div class="uec-avatar" style="background-image:url('https://ui-avatars.com/api/?name=CT&size=80&background=4c525a&color=ffffff&format=png');margin-right:-6px;"></div>
-                          <div class="uec-avatar" style="background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');"></div>
-                        </div>
+                  <div class="uec-past-row" onclick="openCalendarEventDrawer(1)">
+                    <div class="uec-row-body">
+                      <div class="uec-row-title">Strategic Planning Offsite</div>
+                      <div class="uec-row-meta">
+                        <span class="uec-row-meta-item"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1h</span>
+                        <span class="uec-row-meta-sep"></span>
+                        <span class="uec-row-meta-item">Jan 20 &middot; 9:00 AM</span>
                       </div>
+                    </div>
+                    <div class="uec-row-avatars">
+                      <div class="uec-row-avatar" style="background-image:url('https://ui-avatars.com/api/?name=CT&size=80&background=4c525a&color=ffffff&format=png');"></div>
+                      <div class="uec-row-avatar" style="background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');"></div>
                     </div>
                   </div>
                 </div>
@@ -419,22 +510,18 @@
                 </div>
                 <div class="activity-item-body">
                   <div class="activity-meta"><strong>Chris Taylor</strong> attended a meeting &middot; Jan 13, 4:00 PM</div>
-                  <div class="uec-card" onclick="openCalendarEventDrawer(2)">
-                    <span class="uec-rail"></span>
-                    <div class="uec-date-col">
-                      <div class="uec-day-abbr">MON</div>
-                      <div class="uec-day-num">13</div>
-                      <div class="uec-day-month">Jan</div>
-                    </div>
-                    <div class="uec-body">
-                      <div class="uec-title">Product Demo &ndash; Enterprise Plan</div>
-                      <div class="uec-time">Jan 13 &middot; 4:00 &ndash; 5:00 PM &middot; 1h</div>
-                      <div class="uec-footer">
-                        <div class="uec-avatars">
-                          <div class="uec-avatar" style="background-image:url('https://ui-avatars.com/api/?name=CT&size=80&background=4c525a&color=ffffff&format=png');margin-right:-6px;"></div>
-                          <div class="uec-avatar" style="background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');"></div>
-                        </div>
+                  <div class="uec-past-row" onclick="openCalendarEventDrawer(2)">
+                    <div class="uec-row-body">
+                      <div class="uec-row-title">Product Demo &ndash; Enterprise Plan</div>
+                      <div class="uec-row-meta">
+                        <span class="uec-row-meta-item"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1h</span>
+                        <span class="uec-row-meta-sep"></span>
+                        <span class="uec-row-meta-item">Jan 13 &middot; 4:00 PM</span>
                       </div>
+                    </div>
+                    <div class="uec-row-avatars">
+                      <div class="uec-row-avatar" style="background-image:url('https://ui-avatars.com/api/?name=CT&size=80&background=4c525a&color=ffffff&format=png');"></div>
+                      <div class="uec-row-avatar" style="background-image:url('https://ui-avatars.com/api/?name=MF&size=80&background=4c525a&color=ffffff&format=png');"></div>
                     </div>
                   </div>
                 </div>

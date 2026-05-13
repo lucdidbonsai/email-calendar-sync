@@ -36,6 +36,7 @@
     // Show upcoming events section in activity tab
     var upcoming = document.getElementById('upcoming-events-section');
     if (upcoming) upcoming.style.display = '';
+    initUpcomingEvents();
 
     // Switch activity feed to connected state
     var feedDisconnected = document.getElementById('activity-feed-disconnected');
@@ -84,6 +85,41 @@
   }
 
   // ── Meeting overlay modal ──
+  // ── Show more / less for upcoming events ──
+  var _uecShowAll = false;
+  var UEC_PAGE = 5;
+
+  function initUpcomingEvents() {
+    var rows = document.querySelectorAll('#upcoming-events-list .uec-row');
+    var total = rows.length;
+    var showMore = document.getElementById('uec-show-more');
+    var label = document.getElementById('uec-show-more-label');
+    if (total <= UEC_PAGE) {
+      if (showMore) showMore.classList.remove('visible');
+      return;
+    }
+    for (var i = UEC_PAGE; i < total; i++) { rows[i].style.display = 'none'; }
+    var hidden = total - UEC_PAGE;
+    if (label) label.textContent = 'Show ' + hidden + ' more';
+    if (showMore) showMore.classList.add('visible');
+  }
+
+  function toggleShowMoreEvents() {
+    var rows = document.querySelectorAll('#upcoming-events-list .uec-row');
+    var showMore = document.getElementById('uec-show-more');
+    var label = document.getElementById('uec-show-more-label');
+    _uecShowAll = !_uecShowAll;
+    var total = rows.length;
+    if (_uecShowAll) {
+      for (var i = UEC_PAGE; i < total; i++) { rows[i].style.display = ''; }
+      if (label) label.textContent = 'Show less';
+    } else {
+      for (var i = UEC_PAGE; i < total; i++) { rows[i].style.display = 'none'; }
+      var hidden = total - UEC_PAGE;
+      if (label) label.textContent = 'Show ' + hidden + ' more';
+    }
+  }
+
   var pastMeetingData = {
     1: {
       day: 'Mon', date: '20', month: 'Jan',
@@ -155,6 +191,49 @@
         { name: 'Tom Bradley', email: 'tom.bradley@catalystconsulting.io', img: 'https://randomuser.me/api/portraits/men/32.jpg', role: 'Host' },
         { name: 'Chris Taylor', email: 'chris.taylor@hellobonsai.com', img: 'https://ui-avatars.com/api/?name=CT&size=250&background=4c525a&color=ffffff&format=png', role: '' },
         { name: 'Michael Fawler', email: 'michael.fawler@techstart.co', img: 'https://ui-avatars.com/api/?name=MF&size=250&background=4c525a&color=ffffff&format=png', role: '' }
+      ]
+    },
+    13: {
+      day: 'Mon', date: '19', month: 'May',
+      title: 'Northwind — Proposal Walkthrough',
+      time: 'Mon May 19 · 9:00 AM → 10:00 AM',
+      duration: '1h',
+      description: 'Walk through the Q2 proposal with Northwind stakeholders, covering scope, timeline and pricing for the brand refresh engagement.',
+      link: 'https://zoom.us/j/83456123401',
+      recording: null,
+      upcoming: true,
+      participants: [
+        { name: 'Tom Bradley', email: 'tom.bradley@catalystconsulting.io', img: 'https://randomuser.me/api/portraits/men/32.jpg', role: 'Host' },
+        { name: 'Michael Fawler', email: 'michael.fawler@techstart.co', img: 'https://ui-avatars.com/api/?name=MF&size=250&background=4c525a&color=ffffff&format=png', role: '' }
+      ]
+    },
+    14: {
+      day: 'Wed', date: '21', month: 'May',
+      title: 'Renewal Kickoff — TechStart Labs',
+      time: 'Wed May 21 · 1:00 PM → 2:00 PM',
+      duration: '1h',
+      description: 'Kick off the Q3 renewal discussion with TechStart Labs — review scope options, proposed retainer structure, and investor materials timeline.',
+      link: 'https://meet.google.com/rkf-may21-ts',
+      recording: null,
+      upcoming: true,
+      participants: [
+        { name: 'Chris Taylor', email: 'chris.taylor@hellobonsai.com', img: 'https://ui-avatars.com/api/?name=CT&size=250&background=4c525a&color=ffffff&format=png', role: 'Host' },
+        { name: 'Tom Bradley', email: 'tom.bradley@catalystconsulting.io', img: 'https://randomuser.me/api/portraits/men/32.jpg', role: '' },
+        { name: 'Michael Fawler', email: 'michael.fawler@techstart.co', img: 'https://ui-avatars.com/api/?name=MF&size=250&background=4c525a&color=ffffff&format=png', role: '' }
+      ]
+    },
+    15: {
+      day: 'Fri', date: '23', month: 'May',
+      title: 'Coffee — Catch Up',
+      time: 'Fri May 23 · 9:00 AM → 9:30 AM',
+      duration: '30m',
+      description: 'Informal catch-up over coffee. No fixed agenda.',
+      link: null,
+      recording: null,
+      upcoming: true,
+      participants: [
+        { name: 'Michael Fawler', email: 'michael.fawler@techstart.co', img: 'https://ui-avatars.com/api/?name=MF&size=250&background=4c525a&color=ffffff&format=png', role: '' },
+        { name: 'Tom Bradley', email: 'tom.bradley@catalystconsulting.io', img: 'https://randomuser.me/api/portraits/men/32.jpg', role: '' }
       ]
     }
   };
@@ -251,76 +330,97 @@
     var m = pastMeetingData[id];
     if (!m) return;
 
-    document.getElementById('ced-kind-label').textContent = m.upcoming ? 'Upcoming meeting' : 'Past meeting';
+    // Status badge
+    document.getElementById('cem-status-text').textContent = m.upcoming ? 'Upcoming' : 'Attended';
 
-    var badgeClass = m.upcoming ? 'ced-status-badge--upcoming' : 'ced-status-badge--past';
-    var badgeDotColor = m.upcoming ? '#5db6f8' : '#22AD01';
-    var badgeLabel = m.upcoming ? 'Upcoming' : 'Attended';
+    // Title + datetime
+    document.getElementById('cem-title').textContent = m.title;
+    document.getElementById('cem-datetime').textContent = m.time + (m.duration ? ' · ' + m.duration : '');
 
-    var videoSVG = '<svg width="13" height="13" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="1" width="9" height="10" rx="1.5"/><path d="M10 5l5-3v8l-5-3"/></svg>';
-    var clockSVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
-    var alignSVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="12" x2="3" y2="12"/><line x1="21" y1="18" x2="9" y2="18"/></svg>';
-    var linkSVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
+    // Detect platform
+    var platform = 'Meeting link';
+    var platformIconHtml = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#616161" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>';
+    if (m.link) {
+      if (m.link.indexOf('zoom') !== -1) {
+        platform = 'Zoom';
+        platformIconHtml = '<svg width="16" height="16" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="10" fill="#2D8CFF"/><rect x="8" y="14" width="21" height="20" rx="3" fill="white"/><path d="M29 22l11-6v16l-11-6v-4z" fill="white"/></svg>';
+      } else if (m.link.indexOf('meet.google') !== -1) {
+        platform = 'Google Meet';
+        platformIconHtml = '<svg width="16" height="16" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="10" fill="#ffffff"/><path d="M28 24l10-7v14l-10-7z" fill="#00BCD4"/><rect x="8" y="14" width="20" height="20" rx="2" fill="#4CAF50"/><path d="M28 20v8l8 5V15l-8 5z" fill="#1E88E5"/></svg>';
+      }
+    }
 
-    var joinHTML = (m.upcoming && m.link)
-      ? '<a class="ced-join-btn" href="' + m.link + '" target="_blank" onclick="event.stopPropagation();">' +
-          videoSVG + 'Join meeting' +
-        '</a>'
-      : '';
+    // Build body HTML
+    var bodyHtml = '';
 
-    var linkHTML = m.link
-      ? '<div class="ced-field">' +
-          '<span class="ced-field-icon">' + linkSVG + '</span>' +
-          '<div><div class="ced-field-label">Meeting link</div>' +
-          '<div class="ced-field-value ced-field-value--link">' + m.link + '</div></div>' +
-        '</div>'
-      : '';
+    // Meeting link card
+    if (m.link) {
+      bodyHtml += '<div class="cem-link-card">';
+      bodyHtml += '<div class="cem-link-platform-icon">' + platformIconHtml + '</div>';
+      bodyHtml += '<div class="cem-link-info"><div class="cem-link-platform-name">' + platform + '</div>';
+      bodyHtml += '<div class="cem-link-url">' + m.link + '</div></div>';
+      bodyHtml += '<button class="cem-link-copy-btn" onclick="navigator.clipboard&&navigator.clipboard.writeText(\'' + m.link + '\')" title="Copy link">';
+      bodyHtml += '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
+      bodyHtml += '</button>';
+      if (m.upcoming) {
+        bodyHtml += '<a class="cem-join-now-btn" href="' + m.link + '" target="_blank" onclick="event.stopPropagation()">Join now</a>';
+      }
+      bodyHtml += '</div>';
+    }
 
-    var participantsHTML = m.participants.map(function(p) {
-      return '<div class="ced-participant-row">' +
-        '<div class="ced-participant-avatar" style="background-image:url(\'' + p.img + '\');"></div>' +
-        '<div class="ced-participant-info">' +
-          '<div class="ced-participant-name">' + p.name + '</div>' +
-          '<div class="ced-participant-email">' + p.email + '</div>' +
-        '</div>' +
-        (p.role ? '<span class="ced-participant-role">' + p.role + '</span>' : '') +
-        (!m.upcoming ? '<span class="ced-participant-attended"><span class="ced-participant-attended-dot"></span> Attended</span>' : '') +
-      '</div>';
-    }).join('');
+    // Attendees section
+    if (m.participants && m.participants.length) {
+      bodyHtml += '<div>';
+      bodyHtml += '<div class="cem-section-header">';
+      bodyHtml += '<span class="cem-section-label">Attendees <span class="cem-section-count">' + m.participants.length + '</span></span>';
+      if (m.upcoming) bodyHtml += '<span class="cem-section-going">' + m.participants.length + ' of ' + m.participants.length + ' going</span>';
+      bodyHtml += '</div>';
+      m.participants.forEach(function(p, i) {
+        var initials = p.name.split(' ').map(function(n){ return n[0]; }).join('').toUpperCase();
+        var colors = ['#303032','#22AD01','#ee8146','#f45757','#4c6ef5'];
+        var col = colors[i % colors.length];
+        bodyHtml += '<div class="cem-attendee-row">';
+        if (p.img) {
+          bodyHtml += '<div class="cem-attendee-avatar" style="background-image:url(\'' + p.img + '\')"></div>';
+        } else {
+          bodyHtml += '<div class="cem-attendee-avatar" style="background:' + col + '">' + initials + '</div>';
+        }
+        bodyHtml += '<div class="cem-attendee-info">';
+        bodyHtml += '<div class="cem-attendee-name">' + p.name;
+        if (p.role === 'Host') bodyHtml += '<span class="cem-attendee-badge">Organizer</span>';
+        bodyHtml += '</div>';
+        bodyHtml += '<div class="cem-attendee-email">' + p.email + '</div>';
+        bodyHtml += '</div>';
+        if (m.upcoming) {
+          bodyHtml += '<div class="cem-attendee-status"><span class="cem-status-dot-sm" style="background:#22AD01"></span><span style="color:#22AD01;font-size:10.5px;font-weight:500">Going</span></div>';
+        } else {
+          bodyHtml += '<div class="cem-attendee-status"><span class="cem-status-dot-sm" style="background:#22AD01"></span><span style="color:#22AD01;font-size:10.5px;font-weight:500">Attended</span></div>';
+        }
+        bodyHtml += '</div>';
+      });
+      bodyHtml += '</div>';
+    }
 
-    document.getElementById('ced-body').innerHTML =
-      '<div class="ced-title-block">' +
-        '<div class="ced-date-widget">' +
-          '<div class="ced-date-widget-day">' + (m.day || '') + '</div>' +
-          '<div class="ced-date-widget-num">' + m.date + '</div>' +
-          '<div class="ced-date-widget-month">' + (m.month || '') + '</div>' +
-        '</div>' +
-        '<div style="flex:1;min-width:0;">' +
-          '<div class="ced-event-title">' + m.title + '</div>' +
-          '<div class="ced-event-time">' + m.time + ' &middot; ' + m.duration + '</div>' +
-          '<div class="ced-status-badge ' + badgeClass + '">' +
-            '<span class="ced-status-dot" style="background:' + badgeDotColor + ';"></span>' +
-            badgeLabel +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-      joinHTML +
-      '<div class="ced-field">' +
-        '<span class="ced-field-icon">' + alignSVG + '</span>' +
-        '<div><div class="ced-field-label">Description</div>' +
-        '<div class="ced-field-value">' + m.description + '</div></div>' +
-      '</div>' +
-      linkHTML +
-      '<div class="ced-section-label">Participants <span style="color:#c0c4c6;font-weight:400;">' + m.participants.length + '</span></div>' +
-      participantsHTML;
+    // Description
+    if (m.description) {
+      bodyHtml += '<div><div class="cem-desc-label">Description</div>';
+      bodyHtml += '<div class="cem-desc-text">' + m.description + '</div></div>';
+    }
 
-    document.getElementById('outer-wrapper').classList.add('cal-drawer-open');
-    document.getElementById('cal-event-drawer').classList.add('open');
+    document.getElementById('cem-body').innerHTML = bodyHtml;
+
+    // Show modal
+    document.getElementById('cem-overlay').classList.remove('hidden');
   }
 
   function closeCalendarEventDrawer() {
-    document.getElementById('outer-wrapper').classList.remove('cal-drawer-open');
-    document.getElementById('cal-event-drawer').classList.remove('open');
+    document.getElementById('cem-overlay').classList.add('hidden');
+  }
+
+  function closeCem(e) {
+    if (!e || e.target === document.getElementById('cem-overlay')) {
+      document.getElementById('cem-overlay').classList.add('hidden');
+    }
   }
 
   function handleMeetingOverlayClick(e) {
