@@ -17,29 +17,11 @@
   <div class="edp-body">
     <div class="edp-view-mode" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;">
       <div id="edp-body" class="edp-thread-list"></div>
-      <!-- Internal notes display -->
-      <div id="edp-comments-display" class="edp-comments-display"></div>
     </div>
   </div>
 
   <!-- Inline composer (hidden by default, shown when composing) -->
   <div class="edp-inline-composer" id="edp-inline-composer" style="display:none;">
-
-    <!-- Composer tabs: Reply / Reply all / Forward -->
-    <div class="edp-ic-tabs">
-      <button class="edp-ic-tab" id="edp-ic-tab-reply" onclick="openInlineComposer('reply')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg>
-        Reply
-      </button>
-      <button class="edp-ic-tab" id="edp-ic-tab-replyall" onclick="openInlineComposer('replyall')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 2 12 7 7"/><polyline points="13 17 8 12 13 7"/><path d="M22 18v-2a4 4 0 0 0-4-4H2"/></svg>
-        Reply all
-      </button>
-      <button class="edp-ic-tab" id="edp-ic-tab-forward" onclick="openInlineComposer('forward')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 17 20 12 15 7"/><path d="M4 18v-2a4 4 0 0 1 4-4h12"/></svg>
-        Forward
-      </button>
-    </div>
 
     <!-- From row -->
     <div class="edp-ic-field-row">

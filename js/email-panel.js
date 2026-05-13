@@ -45,11 +45,16 @@
       html += '</div>'; // end meta
       html += '<span class="edp-thread-msg-date">' + msg.date + '</span>';
 
-      // Per-message action buttons
-      html += '<div class="edp-thread-msg-actions" onclick="event.stopPropagation()">';
+      // Per-message action buttons (Gmail-style: always visible reply + more menu)
+      html += '<div class="edp-thread-msg-actions edp-thread-msg-actions--persistent" onclick="event.stopPropagation()">';
       html += '<button class="edp-thread-msg-action-btn" data-tooltip="Reply" onclick="openInlineComposer(\'reply\')">' + SVG_REPLY + '</button>';
-      html += '<button class="edp-thread-msg-action-btn" data-tooltip="Reply all" onclick="openInlineComposer(\'replyall\')">' + SVG_REPLY_ALL + '</button>';
-      html += '<button class="edp-thread-msg-action-btn" data-tooltip="Forward" onclick="openInlineComposer(\'forward\')">' + SVG_FORWARD + '</button>';
+      html += '<div class="edp-msg-more-wrap">';
+      html += '<button class="edp-thread-msg-action-btn edp-msg-more-btn" onclick="toggleMsgMoreMenu(event,' + i + ')">···</button>';
+      html += '<div class="edp-msg-more-dropdown" id="edp-msg-more-menu-' + i + '">';
+      html += '<ul>';
+      html += '<li><a onclick="openInlineComposer(\'replyall\')">Reply all</a></li>';
+      html += '<li><a onclick="openInlineComposer(\'forward\')">Forward</a></li>';
+      html += '</ul></div></div>';
       html += '</div>';
 
       // Chevron
@@ -106,7 +111,6 @@
 
     document.getElementById('edp-subject').textContent = d.subject;
     renderEmailThread(idx);
-    renderEmailComments(idx);
 
     if (typeof hideInlineComposer === 'function') hideInlineComposer();
 
@@ -126,6 +130,14 @@
     if (typeof hideInlineComposer === 'function') hideInlineComposer();
   }
 
+  function toggleMsgMoreMenu(e, idx) {
+    e.stopPropagation();
+    var menu = document.getElementById('edp-msg-more-menu-' + idx);
+    var isOpen = menu.classList.contains('open');
+    document.querySelectorAll('.edp-msg-more-dropdown').forEach(function(m) { m.classList.remove('open'); });
+    if (!isOpen) menu.classList.add('open');
+  }
+
   // Legacy stubs
   function openReply() { if (typeof openInlineComposer === 'function') openInlineComposer('reply'); }
   function clearReply() {}
@@ -143,6 +155,9 @@
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.add-btn-wrap')) {
       document.getElementById('add-activity-menu').classList.remove('open');
+    }
+    if (!e.target.closest('.edp-msg-more-wrap')) {
+      document.querySelectorAll('.edp-msg-more-dropdown').forEach(function(m) { m.classList.remove('open'); });
     }
     if (!e.target.closest('.email-dots-wrap')) {
       if (typeof emailDotsMenuOpen !== 'undefined' && emailDotsMenuOpen) {

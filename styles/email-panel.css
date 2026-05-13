@@ -218,13 +218,31 @@
     .edp-thread-msg-body p { margin: 0 0 12px; }
     .edp-thread-msg-body p:last-child { margin-bottom: 0; }
 
-    /* Per-message action buttons (hover reveal) */
+    /* Per-message action buttons */
     .edp-thread-msg-actions {
       display: flex; align-items: center; gap: 2px;
       opacity: 0; transition: opacity 0.12s;
       flex-shrink: 0;
     }
     .edp-thread-msg:hover .edp-thread-msg-actions { opacity: 1; }
+    .edp-thread-msg-actions--persistent { opacity: 1 !important; }
+
+    /* More-actions dropdown */
+    .edp-msg-more-wrap { position: relative; }
+    .edp-msg-more-dropdown {
+      display: none; position: absolute; top: calc(100% + 4px); right: 0;
+      background: var(--bg-content); border: 1px solid var(--border-content);
+      border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      z-index: 300; min-width: 130px; padding: 4px 0;
+    }
+    .edp-msg-more-dropdown.open { display: block; }
+    .edp-msg-more-dropdown ul { margin: 0; padding: 0; list-style: none; }
+    .edp-msg-more-dropdown li a {
+      display: block; padding: 8px 14px;
+      font-size: 13px; color: var(--text-default); cursor: pointer; text-decoration: none;
+    }
+    .edp-msg-more-dropdown li a:hover { background: var(--bg-grey-f8); color: var(--text-default) !important; }
+
     .edp-thread-msg-action-btn {
       width: 28px; height: 28px; border-radius: 5px;
       background: none; border: none; cursor: pointer;
