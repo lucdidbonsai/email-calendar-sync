@@ -36,6 +36,7 @@
     // Show upcoming events section in activity tab
     var upcoming = document.getElementById('upcoming-events-section');
     if (upcoming) upcoming.style.display = '';
+    initUpcomingEvents();
 
     // Switch activity feed to connected state
     var feedDisconnected = document.getElementById('activity-feed-disconnected');
@@ -84,6 +85,41 @@
   }
 
   // ── Meeting overlay modal ──
+  // ── Show more / less for upcoming events ──
+  var _uecShowAll = false;
+  var UEC_PAGE = 5;
+
+  function initUpcomingEvents() {
+    var rows = document.querySelectorAll('#upcoming-events-list .uec-row');
+    var total = rows.length;
+    var showMore = document.getElementById('uec-show-more');
+    var label = document.getElementById('uec-show-more-label');
+    if (total <= UEC_PAGE) {
+      if (showMore) showMore.classList.remove('visible');
+      return;
+    }
+    for (var i = UEC_PAGE; i < total; i++) { rows[i].style.display = 'none'; }
+    var hidden = total - UEC_PAGE;
+    if (label) label.textContent = 'Show ' + hidden + ' more';
+    if (showMore) showMore.classList.add('visible');
+  }
+
+  function toggleShowMoreEvents() {
+    var rows = document.querySelectorAll('#upcoming-events-list .uec-row');
+    var showMore = document.getElementById('uec-show-more');
+    var label = document.getElementById('uec-show-more-label');
+    _uecShowAll = !_uecShowAll;
+    var total = rows.length;
+    if (_uecShowAll) {
+      for (var i = UEC_PAGE; i < total; i++) { rows[i].style.display = ''; }
+      if (label) label.textContent = 'Show less';
+    } else {
+      for (var i = UEC_PAGE; i < total; i++) { rows[i].style.display = 'none'; }
+      var hidden = total - UEC_PAGE;
+      if (label) label.textContent = 'Show ' + hidden + ' more';
+    }
+  }
+
   var pastMeetingData = {
     1: {
       day: 'Mon', date: '20', month: 'Jan',
@@ -155,6 +191,49 @@
         { name: 'Tom Bradley', email: 'tom.bradley@catalystconsulting.io', img: 'https://randomuser.me/api/portraits/men/32.jpg', role: 'Host' },
         { name: 'Chris Taylor', email: 'chris.taylor@hellobonsai.com', img: 'https://ui-avatars.com/api/?name=CT&size=250&background=4c525a&color=ffffff&format=png', role: '' },
         { name: 'Michael Fawler', email: 'michael.fawler@techstart.co', img: 'https://ui-avatars.com/api/?name=MF&size=250&background=4c525a&color=ffffff&format=png', role: '' }
+      ]
+    },
+    13: {
+      day: 'Mon', date: '19', month: 'May',
+      title: 'Northwind — Proposal Walkthrough',
+      time: 'Mon May 19 · 9:00 AM → 10:00 AM',
+      duration: '1h',
+      description: 'Walk through the Q2 proposal with Northwind stakeholders, covering scope, timeline and pricing for the brand refresh engagement.',
+      link: 'https://zoom.us/j/83456123401',
+      recording: null,
+      upcoming: true,
+      participants: [
+        { name: 'Tom Bradley', email: 'tom.bradley@catalystconsulting.io', img: 'https://randomuser.me/api/portraits/men/32.jpg', role: 'Host' },
+        { name: 'Michael Fawler', email: 'michael.fawler@techstart.co', img: 'https://ui-avatars.com/api/?name=MF&size=250&background=4c525a&color=ffffff&format=png', role: '' }
+      ]
+    },
+    14: {
+      day: 'Wed', date: '21', month: 'May',
+      title: 'Renewal Kickoff — TechStart Labs',
+      time: 'Wed May 21 · 1:00 PM → 2:00 PM',
+      duration: '1h',
+      description: 'Kick off the Q3 renewal discussion with TechStart Labs — review scope options, proposed retainer structure, and investor materials timeline.',
+      link: 'https://meet.google.com/rkf-may21-ts',
+      recording: null,
+      upcoming: true,
+      participants: [
+        { name: 'Chris Taylor', email: 'chris.taylor@hellobonsai.com', img: 'https://ui-avatars.com/api/?name=CT&size=250&background=4c525a&color=ffffff&format=png', role: 'Host' },
+        { name: 'Tom Bradley', email: 'tom.bradley@catalystconsulting.io', img: 'https://randomuser.me/api/portraits/men/32.jpg', role: '' },
+        { name: 'Michael Fawler', email: 'michael.fawler@techstart.co', img: 'https://ui-avatars.com/api/?name=MF&size=250&background=4c525a&color=ffffff&format=png', role: '' }
+      ]
+    },
+    15: {
+      day: 'Fri', date: '23', month: 'May',
+      title: 'Coffee — Catch Up',
+      time: 'Fri May 23 · 9:00 AM → 9:30 AM',
+      duration: '30m',
+      description: 'Informal catch-up over coffee. No fixed agenda.',
+      link: null,
+      recording: null,
+      upcoming: true,
+      participants: [
+        { name: 'Michael Fawler', email: 'michael.fawler@techstart.co', img: 'https://ui-avatars.com/api/?name=MF&size=250&background=4c525a&color=ffffff&format=png', role: '' },
+        { name: 'Tom Bradley', email: 'tom.bradley@catalystconsulting.io', img: 'https://randomuser.me/api/portraits/men/32.jpg', role: '' }
       ]
     }
   };

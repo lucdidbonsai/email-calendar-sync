@@ -14,88 +14,32 @@
 
     /* Top bar */
     .edp-top-bar {
-      display: flex; align-items: center; gap: 8px;
-      padding: 0 24px; height: 52px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 20px 0 24px; height: 52px;
       border-bottom: 1px solid var(--border-content);
-      flex-shrink: 0;
+      flex-shrink: 0; gap: 12px;
     }
-    .edp-top-bar-icon { color: var(--text-muted); display: flex; align-items: center; flex-shrink: 0; }
-    .edp-top-bar-label { flex: 1; font-size: 14px; font-weight: 500; color: var(--text-default); }
-    .edp-close-btn {
-      width: 30px; height: 30px; border-radius: 6px;
-      background: none; border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--text-muted); transition: background 0.12s; flex-shrink: 0;
+    .edp-top-bar-left {
+      display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1;
     }
-    .edp-close-btn:hover { background: var(--bg-grey-f5); }
-
-    /* Subject row */
-    .edp-subject-bar {
-      display: flex; align-items: flex-start; justify-content: space-between; gap: 14px;
-      padding: 20px 24px 0;
-      flex-shrink: 0;
-      position: relative;
-    }
+    .edp-top-bar-icon { color: var(--text-lighter); display: flex; align-items: center; flex-shrink: 0; }
     .edp-subject {
-      font-size: 17px; font-weight: 600; color: var(--text-default);
-      line-height: 1.35; flex: 1; min-width: 0;
+      font-size: 14px; font-weight: 600; color: var(--text-default);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
     }
-    .edp-share-btn {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 5px 10px; border-radius: 5px;
-      background: none; border: 1px solid var(--border-content);
-      font-size: 12px; font-weight: 500; color: var(--text-default);
-      cursor: pointer; white-space: nowrap; flex-shrink: 0;
-      transition: background 0.12s;
-    }
-    .edp-share-btn:hover { background: var(--bg-grey-f8); }
-
-    /* Share popover inside panel */
-    .edp-share-popover { z-index: 200; }
-
-    /* Sender row */
-    .edp-sender-bar {
-      display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
-      padding: 14px 24px 18px;
-      border-bottom: 1px solid var(--border-content);
-      flex-shrink: 0;
-    }
-    .edp-sender-left { display: flex; gap: 10px; align-items: flex-start; min-width: 0; }
-    .edp-sender-info { min-width: 0; }
-    .edp-sender-name { font-size: 13px; font-weight: 600; color: var(--text-default); }
-    .edp-sender-to {
-      font-size: 12px; color: var(--text-muted);
-      display: inline-flex; align-items: center; gap: 3px; cursor: pointer;
-    }
-    .edp-sender-to:hover { color: var(--text-default); }
-    .edp-sender-right { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
-
-    /* Action buttons with CSS tooltips */
-    .edp-action-btn {
-      width: 28px; height: 28px; border-radius: 5px;
+    .edp-close-btn {
+      width: 30px; height: 30px; border-radius: 6px; flex-shrink: 0;
       background: none; border: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       color: var(--text-muted); transition: background 0.12s;
-      position: relative;
     }
-    .edp-action-btn:hover { background: var(--bg-grey-f5); color: var(--text-default); }
-    .edp-action-btn::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      top: calc(100% + 6px);
-      left: 50%; transform: translateX(-50%);
-      background: #1a1a1a; color: #fff;
-      padding: 4px 8px; border-radius: 5px;
-      font-size: 12px; font-weight: 500; white-space: nowrap;
-      pointer-events: none; opacity: 0;
-      transition: opacity 0.12s; z-index: 10;
-    }
-    .edp-action-btn:hover::after { opacity: 1; }
-    .edp-action-btn--active {
-      background: var(--bg-grey-f1) !important;
-      color: var(--text-default) !important;
-    }
-    .edp-meta-date { font-size: 12px; color: var(--text-muted); white-space: nowrap; padding-left: 6px; }
+    .edp-close-btn:hover { background: var(--bg-grey-f5); }
+
+    /* Legacy stubs kept so nothing breaks */
+    .edp-subject-bar { display: none; }
+    .edp-sender-bar { display: none; }
+    .edp-action-btn { display: none; }
+    .edp-share-popover { z-index: 200; }
 
     /* Body (scrollable area) */
     .edp-body {
@@ -212,23 +156,65 @@
       left: 0; transform: none;
     }
 
-    /* ── Thread messages in drawer ── */
+    /* ── Thread messages ── */
     .edp-thread-list { flex-shrink: 0; }
     .edp-thread-msg { border-bottom: 1px solid var(--border-content); }
     .edp-thread-msg:last-child { border-bottom: none; }
+
+    /* Collapsed header (full row is clickable) */
+    .edp-thread-msg--collapsed {
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+    .edp-thread-msg--collapsed:hover { background: var(--bg-grey-fa); }
+
     .edp-thread-msg-header {
       display: flex; align-items: center; gap: 10px;
-      padding: 14px 24px; cursor: pointer; transition: background 0.12s;
+      padding: 13px 20px 13px 24px;
     }
-    .edp-thread-msg-header:hover { background: var(--bg-grey-fa); }
+    .edp-thread-msg--expanded .edp-thread-msg-header { cursor: default; }
     .edp-thread-msg-meta { flex: 1; min-width: 0; }
+
+    /* Name row (sender + SENT badge + email address) */
+    .edp-thread-msg-name-row {
+      display: flex; align-items: center; gap: 7px; flex-wrap: wrap;
+    }
     .edp-thread-msg-sender { font-size: 13px; font-weight: 600; color: var(--text-default); }
-    .edp-thread-msg-snip { font-size: 12px; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 24px 12px 24px; }
-    .edp-thread-msg-to { font-size: 12px; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .edp-thread-msg-sent-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.04em;
+      color: #22AD01; background: rgba(34,173,1,0.08);
+      border-radius: 4px; padding: 1px 5px;
+      flex-shrink: 0;
+    }
+    .edp-thread-msg-email { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+    .edp-thread-msg-to-row { display: flex; align-items: center; gap: 3px; margin-top: 1px; }
+    .edp-thread-msg-to { font-size: 12px; color: var(--text-muted); }
+
+    /* Snippet row (collapsed only) */
+    .edp-thread-msg-snip-row {
+      font-size: 13px; color: var(--text-muted);
+      padding: 0 24px 11px 58px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .edp-thread-msg--expanded .edp-thread-msg-snip-row { display: none; }
+
+    /* Chevron */
+    .edp-thread-msg-chevron {
+      color: var(--text-lighter); flex-shrink: 0;
+      transition: transform 0.15s;
+    }
+    .edp-thread-msg--expanded .edp-thread-msg-chevron { transform: rotate(180deg); }
+
+    /* Date */
     .edp-thread-msg-date { font-size: 12px; color: var(--text-muted); flex-shrink: 0; white-space: nowrap; }
-    .edp-thread-msg-actions { display: flex; gap: 2px; align-items: center; flex-shrink: 0; opacity: 0; transition: opacity 0.12s; }
-    .edp-thread-msg-header:hover .edp-thread-msg-actions { opacity: 1; }
-    .edp-thread-msg-body { padding: 0 24px 20px 58px; font-size: 14px; color: var(--text-default); line-height: 1.7; }
+
+    /* Body */
+    .edp-thread-msg-body {
+      padding: 2px 24px 20px 58px;
+      font-size: 14px; color: var(--text-default); line-height: 1.7;
+      display: none;
+    }
+    .edp-thread-msg--expanded .edp-thread-msg-body { display: block; }
     .edp-thread-msg-body p { margin: 0 0 12px; }
     .edp-thread-msg-body p:last-child { margin-bottom: 0; }
 
@@ -395,10 +381,71 @@
     .edp-ai-cancel-link { margin-left: auto; font-size: 12px; color: var(--text-muted); cursor: pointer; }
     .edp-ai-cancel-link:hover { color: var(--text-default); text-decoration: underline; }
 
+    /* ── Action bar (Reply / Reply all / Forward buttons) ── */
+    .edp-action-bar {
+      flex-shrink: 0;
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 24px 16px;
+      border-top: 1px solid var(--border-content);
+    }
+    .edp-action-bar-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      height: 32px; padding: 0 14px;
+      background: var(--bg-grey-fa); border: 1px solid var(--border-content);
+      border-radius: 6px; font-size: 13px; font-weight: 500;
+      color: var(--text-default); cursor: pointer;
+      transition: background 0.12s, border-color 0.12s;
+    }
+    .edp-action-bar-btn:hover { background: var(--bg-grey-f5); }
+    .edp-action-bar-btn svg { flex-shrink: 0; color: var(--text-muted); }
+
     /* ── Inline Composer (reply inside Email Side Panel) ── */
     .edp-inline-composer { flex-shrink: 0; border-top: 1px solid var(--border-content); }
     .edp-ic-divider { height: 1px; background: #e5e7eb; }
     .edp-ic-label { padding: 10px 24px 8px; font-size: 13px; font-weight: 500; color: #22AD01; }
+
+    /* Composer mode tabs (Reply / Reply all / Forward) */
+    .edp-ic-tabs {
+      display: flex; align-items: center; flex-shrink: 0;
+      padding: 0 16px; border-bottom: 1px solid var(--border-content); gap: 0;
+    }
+    .edp-ic-tab {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: none; border: none; border-bottom: 2px solid transparent;
+      padding: 9px 10px; margin-bottom: -1px;
+      font-size: 13px; font-weight: 500; color: var(--text-muted);
+      cursor: pointer; transition: color 0.12s; line-height: 1;
+    }
+    .edp-ic-tab:hover { color: var(--text-default); }
+    .edp-ic-tab--active { color: var(--text-default); border-bottom-color: #22AD01; }
+
+    /* From field */
+    .edp-ic-field-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 0 24px; height: 40px; flex-shrink: 0;
+      border-bottom: 1px solid var(--border-content);
+    }
+    .edp-ic-from-value { font-size: 13px; color: var(--text-default); }
+
+    /* Toolbar icon buttons */
+    .edp-ic-tool-btn {
+      width: 30px; height: 30px; border-radius: 5px;
+      background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); transition: background 0.12s, color 0.12s;
+      position: relative;
+    }
+    .edp-ic-tool-btn:hover { background: var(--bg-grey-f5); color: var(--text-default); }
+    .edp-ic-tool-btn--discard:hover { color: #eb5757; background: rgba(235,87,87,0.06); }
+    .edp-ic-tool-btn[data-tooltip]::after {
+      content: attr(data-tooltip);
+      position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+      background: #1a1a1a; color: #fff; padding: 4px 8px; border-radius: 5px;
+      font-size: 12px; font-weight: 500; white-space: nowrap;
+      pointer-events: none; opacity: 0; transition: opacity 0.12s; z-index: 10;
+    }
+    .edp-ic-tool-btn[data-tooltip]:hover::after { opacity: 1; }
+
     .edp-ic-to-row {
       display: flex; align-items: center;
       padding: 0 24px; height: 44px;

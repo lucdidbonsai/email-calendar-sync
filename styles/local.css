@@ -2334,108 +2334,152 @@
   text-decoration: none !important;
 }
 
-/* ── Upcoming Event Card (Exploration 3 layout + Exploration 1 green rail) ── */
+/* ── Upcoming Event Rows (Figma flat list design) ── */
 #upcoming-events-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   margin-bottom: 28px;
+  border-top: 1px solid #ececec;
 }
-.uec-card {
+.uec-row {
   display: flex;
-  align-items: stretch;
-  border: 1px solid #ececec;
-  border-radius: 8px;
-  background: #fff;
-  overflow: hidden;
+  align-items: center;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid #ececec;
   cursor: pointer;
+  position: relative;
   transition: background 0.1s;
 }
-.uec-card:hover { background: #fafafa; }
-.uec-rail {
-  width: 3px;
-  background: #22AD01;
+.uec-row:hover { background: #f8f9f8; margin: 0 -6px; padding-left: 6px; padding-right: 6px; }
+.uec-row-left {
+  width: 90px;
   flex-shrink: 0;
-}
-.uec-date-col {
-  width: 60px;
-  text-align: center;
-  border-right: 1px solid #f5f5f5;
-  padding: 12px 0;
-  flex-shrink: 0;
-}
-.uec-day-abbr {
-  font-size: 10px;
-  font-weight: 600;
-  color: #22AD01;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  line-height: 1;
-  margin-bottom: 2px;
-}
-.uec-day-num {
-  font-size: 22px;
-  font-weight: 600;
-  color: #121212;
-  line-height: 1;
-}
-.uec-day-month {
-  font-size: 10px;
-  color: #96a6a2;
-  margin-top: 2px;
-}
-.uec-body {
-  flex: 1;
-  min-width: 0;
-  padding: 12px 14px;
   display: flex;
   flex-direction: column;
   gap: 3px;
 }
-.uec-title {
-  font-size: 13.5px;
+.uec-row-day-label {
+  font-size: 12px;
+  color: #96a6a2;
+  font-weight: 400;
+  line-height: 1.2;
+}
+.uec-row-time {
+  font-size: 14px;
   font-weight: 500;
   color: #121212;
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+}
+.uec-row-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.uec-row-title {
+  font-size: 14px;
+  color: #121212;
+  font-weight: 400;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.uec-time {
-  font-size: 12px;
-  color: #616161;
-}
-.uec-footer {
+.uec-row-meta {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 4px;
+  gap: 6px;
 }
-.uec-avatars { display: flex; align-items: center; }
-.uec-avatar {
-  width: 20px; height: 20px; border-radius: 50%;
-  border: 1.5px solid #fff;
-  background-size: cover; background-position: center;
-  background-color: #e0e0e0;
-  flex-shrink: 0; display: inline-block;
+.uec-row-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  color: #616161;
+  white-space: nowrap;
 }
-.uec-join-btn {
+.uec-row-meta-sep {
+  width: 2.5px;
+  height: 2.5px;
+  background: #d7d9d5;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.uec-row-avatars {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.uec-row-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-color: #f5f5f5;
+  box-shadow: 0 0 0 2px #fff;
+  flex-shrink: 0;
+}
+.uec-row-avatars .uec-row-avatar + .uec-row-avatar { margin-left: -8px; }
+.uec-row-join {
+  flex-shrink: 0;
+  width: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.uec-row-join-btn {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  align-self: center;
-  flex-shrink: 0;
-  margin: 0 14px;
   background: #22AD01;
   color: #fff;
   border: none;
   border-radius: 6px;
-  padding: 5px 11px;
+  padding: 5px 10px;
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
   font-family: inherit;
+  opacity: 0;
+  transition: opacity 0.15s;
+  white-space: nowrap;
 }
-.uec-join-btn:hover { background: #1e9a01; }
+.uec-row:hover .uec-row-join-btn { opacity: 1; }
+.uec-row-join-btn:hover { background: #1e9a01; }
+
+/* Show more link */
+.uec-show-more {
+  display: none;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 0 2px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.12s;
+}
+.uec-show-more:hover { color: var(--text-default); }
+.uec-show-more.visible { display: flex; }
+
+/* Past event row (inside activity feed .activity-item-body) */
+.uec-past-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid #ececec;
+  border-radius: 7px;
+  padding: 10px 14px;
+  cursor: pointer;
+  background: #fff;
+  transition: background 0.1s;
+  margin-top: 2px;
+}
+.uec-past-row:hover { background: #fafafa; }
 
 /* ── Calendar Event Side Drawer (push style — no backdrop) ── */
 .ced-backdrop { display: none; } /* kept in DOM but never shown */
