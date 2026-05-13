@@ -2468,6 +2468,7 @@
   align-items: center;
   gap: 5px;
   padding: 10px 0 2px;
+  margin-bottom: 20px;
   font-size: 13px;
   font-weight: 500;
   color: var(--text-muted);
